@@ -16,7 +16,8 @@
     your controls and content.
 */
 class MainComponent   : public AudioAppComponent,
-                        public Button::Listener
+                        public Button::Listener,
+                        public Slider::Listener
 {
 public:
     //==============================================================================
@@ -33,7 +34,10 @@ public:
     void resized() override;
     
     /** Implement Button::Listener*/
-    void buttonClicked (Button *);
+    void buttonClicked (Button *) override;
+
+        /** Implement Slider::Listener*/
+    void sliderValueChanged (Slider *slider) override;
 
 private:
     //==============================================================================
