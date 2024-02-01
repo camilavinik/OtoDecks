@@ -47,13 +47,28 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
-
+    phase = 0.0;
+    dphase = 0.0001;
 
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    bufferToFill.clearActiveBufferRegion();
+    auto* leftChan = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
+    auto* rightChan = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
+
+    for (auto i=0; i < bufferToFill.numSamples; ++i)
+    {
+        // double sample = rand.nextDouble() * 0.25;
+        double sample = sin(phase) * 0.1;
+        leftChan[i] = sample;
+        rightChan[i] = sample;
+
+        phase += dphase;
+    }
+
+
+    // bufferToFill.clearActiveBufferRegion();
 }
 
 void MainComponent::releaseResources()
@@ -103,6 +118,7 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if (slider == &volSlider)
     {
-        std::cout << "vol slider moved " << slider->getValue() << std::endl;
+        //std::cout << "vol slider moved " << slider->getValue() << std::endl;
+        dphase = volSlider.getValue() * 0.01;
     }
 }
