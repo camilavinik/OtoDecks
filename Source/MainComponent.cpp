@@ -29,16 +29,17 @@ MainComponent::MainComponent()
     }
 
     addAndMakeVisible(playButton);
+    playButton.addListener(this);
+
     addAndMakeVisible(stopButton);
-    addAndMakeVisible(loadButton); 
+    stopButton.addListener(this);
 
     addAndMakeVisible(volSlider);
-
-    playButton.addListener(this);
-    stopButton.addListener(this);
-    loadButton.addListener(this);
-
     volSlider.addListener(this);
+    volSlider.setRange(0.0, 1.0);
+    
+    addAndMakeVisible(loadButton); 
+    loadButton.addListener(this);
 }
 
 MainComponent::~MainComponent()
@@ -120,11 +121,13 @@ void MainComponent::buttonClicked(Button* button)
     if (button == &playButton)
     {
         std::cout << "Play button was clicked" << std::endl;
+        transportSource.start();
     }
 
     if (button == &stopButton)
     {
         std::cout << "Stop button was clicked" << std::endl;
+        transportSource.stop();
     }
 
     if (button == &loadButton)
@@ -149,8 +152,7 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if (slider == &volSlider)
     {
-        //std::cout << "vol slider moved " << slider->getValue() << std::endl;
-        dphase = volSlider.getValue() * 0.01;
+        transportSource.setGain(slider->getValue());
     }
 }
 
@@ -162,6 +164,5 @@ void MainComponent::loadURL(URL audioURL)
         std::unique_ptr<AudioFormatReaderSource> newSource(new AudioFormatReaderSource(reader, true));
         transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
         readerSource.reset(newSource.release());
-        transportSource.start();
     }
 }
