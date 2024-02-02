@@ -47,7 +47,8 @@ private:
     TextButton stopButton{"STOP"};
     TextButton loadButton{"LOAD"};
 
-    Slider volSlider; 
+    Slider volSlider;
+    Slider speedSlider;
 
     Random rand;
 
@@ -59,6 +60,7 @@ private:
     std::unique_ptr<AudioFormatReaderSource> readerSource;
 
     AudioTransportSource transportSource;
+    ResamplingAudioSource resampleSource{&transportSource, false, 2};
 
     void loadURL(URL audioURL);
 

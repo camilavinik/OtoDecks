@@ -28,16 +28,24 @@ MainComponent::MainComponent()
         setAudioChannels (0, 2);
     }
 
+    // play button
     addAndMakeVisible(playButton);
     playButton.addListener(this);
 
+    // stop button
     addAndMakeVisible(stopButton);
     stopButton.addListener(this);
 
+    // volume slider
     addAndMakeVisible(volSlider);
     volSlider.addListener(this);
     volSlider.setRange(0.0, 1.0);
-    
+
+    // speedq
+    addAndMakeVisible(speedSlider);
+    speedSlider.addListener(this);
+
+    // load button
     addAndMakeVisible(loadButton); 
     loadButton.addListener(this);
 }
@@ -56,13 +64,14 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
 
     formatManager.registerBasicFormats();
 
-
     transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    resampleSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    transportSource.getNextAudioBlock(bufferToFill);
+    // transportSource.getNextAudioBlock(bufferToFill);
+    resampleSource.getNextAudioBlock(bufferToFill);
 }
 
 // void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
@@ -110,9 +119,9 @@ void MainComponent::resized()
     double rowH = getHeight() / 5; 
     playButton.setBounds(0, 0, getWidth(), rowH);
     stopButton.setBounds(0, rowH, getWidth(), rowH);
-
     volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
-    loadButton.setBounds(0, rowH * 3, getWidth(), rowH);
+    speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
+    loadButton.setBounds(0, rowH * 4, getWidth(), rowH);
 
 }
 
@@ -153,6 +162,11 @@ void MainComponent::sliderValueChanged(Slider* slider)
     if (slider == &volSlider)
     {
         transportSource.setGain(slider->getValue());
+    }
+
+        if (slider == &speedSlider)
+    {
+        resampleSource.setResamplingRatio(slider->getValue());
     }
 }
 
