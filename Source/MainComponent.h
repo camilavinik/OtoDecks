@@ -45,6 +45,7 @@ private:
 
     TextButton playButton{"PLAY"};
     TextButton stopButton{"STOP"};
+    TextButton loadButton{"LOAD"};
 
     Slider volSlider; 
 
@@ -52,6 +53,16 @@ private:
 
     double phase;
     double dphase;
-    
+
+    AudioFormatManager formatManager;
+
+    std::unique_ptr<AudioFormatReaderSource> readerSource;
+
+    AudioTransportSource transportSource;
+
+    void loadURL(URL audioURL);
+
+    juce::FileChooser fChooser{"Select a file..."};
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
