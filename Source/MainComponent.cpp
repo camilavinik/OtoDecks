@@ -59,47 +59,17 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
-    phase = 0.0;
-    dphase = 0.0001;
-
-    formatManager.registerBasicFormats();
-
-    transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
-    resampleSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    player1.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    // transportSource.getNextAudioBlock(bufferToFill);
-    resampleSource.getNextAudioBlock(bufferToFill);
+    player1.getNextAudioBlock(bufferToFill);
 }
-
-// void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
-// {
-//     auto* leftChan = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-//     auto* rightChan = bufferToFill.buffer->getWritePointer(0, bufferToFill.startSample);
-
-//     for (auto i=0; i < bufferToFill.numSamples; ++i)
-//     {
-//         // double sample = rand.nextDouble() * 0.25;
-//         double sample = sin(phase) * 0.1;
-//         leftChan[i] = sample;
-//         rightChan[i] = sample;
-
-//         phase += dphase;
-//     }
-
-
-//     // bufferToFill.clearActiveBufferRegion();
-// }
 
 void MainComponent::releaseResources()
 {
-    // This will be called when the audio device stops, or when it is being
-    // restarted due to a setting change.
-
-    // For more details, see the help for AudioProcessor::releaseResources()
-    transportSource.releaseResources();
+    player1.releaseResources();
 }
 
 //==============================================================================
@@ -130,13 +100,13 @@ void MainComponent::buttonClicked(Button* button)
     if (button == &playButton)
     {
         std::cout << "Play button was clicked" << std::endl;
-        transportSource.start();
+        player1.start();
     }
 
     if (button == &stopButton)
     {
         std::cout << "Stop button was clicked" << std::endl;
-        transportSource.stop();
+        player1.stop();
     }
 
     if (button == &loadButton)
@@ -151,8 +121,7 @@ void MainComponent::buttonClicked(Button* button)
         // not seen before. Please do not worry too much about that. 
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
         {
-            File chosenFile = chooser.getResult();
-            loadURL(URL{chosenFile});
+            player1.loadURL(URL{chooser.getResult()});
         });
     }
 }
@@ -161,22 +130,11 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if (slider == &volSlider)
     {
-        transportSource.setGain(slider->getValue());
+        
     }
 
-        if (slider == &speedSlider)
+    if (slider == &speedSlider)
     {
-        resampleSource.setResamplingRatio(slider->getValue());
-    }
-}
-
-void MainComponent::loadURL(URL audioURL)
-{
-    auto* reader = formatManager.createReaderFor(audioURL.createInputStream(false));
-    if (reader != nullptr) // good file!
-    {
-        std::unique_ptr<AudioFormatReaderSource> newSource(new AudioFormatReaderSource(reader, true));
-        transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
-        readerSource.reset(newSource.release());
+        
     }
 }

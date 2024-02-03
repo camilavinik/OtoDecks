@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "DJAudioPlayer.h"
 
 //==============================================================================
 /*
@@ -49,20 +50,7 @@ private:
 
     Slider volSlider;
     Slider speedSlider;
-
-    Random rand;
-
-    double phase;
-    double dphase;
-
-    AudioFormatManager formatManager;
-
-    std::unique_ptr<AudioFormatReaderSource> readerSource;
-
-    AudioTransportSource transportSource;
-    ResamplingAudioSource resampleSource{&transportSource, false, 2};
-
-    void loadURL(URL audioURL);
+    DJAudioPlayer player1;
 
     juce::FileChooser fChooser{"Select a file..."};
 
