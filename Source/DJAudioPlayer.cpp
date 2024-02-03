@@ -38,7 +38,7 @@ void DJAudioPlayer::loadURL(URL audioURL) {
   }
 }
 void DJAudioPlayer::setGain(double gain) {
-  if (gain < 0 || gain > 1) {
+  if (gain < 0 || gain > 1.0) {
     std::cout << "DJAudioPlayer::setGain gain should be between 0 and 1" << std::endl;
   } else {
     transportSource.setGain(gain);
@@ -53,7 +53,18 @@ void DJAudioPlayer::setSpeed(double ratio) {
   }
 }
 
-void DJAudioPlayer::setPosition(double posInSecs) {}
+void DJAudioPlayer::setPosition(double posInSecs) {
+  transportSource.setPosition(posInSecs);
+}
+
+void DJAudioPlayer::setPositionRelative(double pos) {
+  if (pos < 0 || pos > 1.0) {
+    std::cout << "DJAudioPlayer::setPositionRelative pos should be between 0 and 1" << std::endl;
+  } else {
+    double posInSecs = transportSource.getLengthInSeconds() * pos;
+    setPosition(posInSecs);
+  }
+}
 
 void DJAudioPlayer::start() {
   transportSource.start();

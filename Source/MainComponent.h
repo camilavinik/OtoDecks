@@ -50,6 +50,7 @@ private:
 
     Slider volSlider;
     Slider speedSlider;
+    Slider posSlider;
     DJAudioPlayer player1;
 
     juce::FileChooser fChooser{"Select a file..."};
