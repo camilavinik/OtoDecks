@@ -14,6 +14,8 @@
 //==============================================================================
 DeckGUI::DeckGUI(DJAudioPlayer* _player) : player(_player)
 {
+  player->registerBasicFormats();
+
   // play button
   addAndMakeVisible(playButton);
   playButton.addListener(this);

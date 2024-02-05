@@ -14,7 +14,6 @@ DJAudioPlayer::DJAudioPlayer() {}
 DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate) {
-  formatManager.registerBasicFormats();
   transportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
   resamplingSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
@@ -72,4 +71,9 @@ void DJAudioPlayer::start() {
 
 void DJAudioPlayer::stop() {
   transportSource.stop();
+}
+
+void DJAudioPlayer::registerBasicFormats()
+{
+  formatManager.registerBasicFormats();
 }
