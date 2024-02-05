@@ -24,6 +24,7 @@
 		5F303BCA086D07D394309EA1 /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = C0DB72B3C6F5D4F84AA0DA97; };
 		710D41FCF6AE330E26EA75E5 /* include_juce_cryptography.mm */ = {isa = PBXBuildFile; fileRef = 8427169ABF0C905CBA1765C1; };
 		747D8560FAE191B73FAF9C1F /* App */ = {isa = PBXBuildFile; fileRef = 63A0CEC7EEC21FFBC04D91E0; };
+		78AD87CEB890BBD7FE1F1CDA /* DeckGUI.cpp */ = {isa = PBXBuildFile; fileRef = 0FB521BBF72F6BD30CFBBC8C; };
 		81986A999A20E051E07BD88D /* include_juce_audio_utils.mm */ = {isa = PBXBuildFile; fileRef = A70D7EC7F4209CB1C677E780; };
 		819E9B0E9ACF83167BD635CB /* include_juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = 0370341CC294579C28CAE98D; };
 		946AC5A5371ABB354D112613 /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = 598E52BEB1E04626A10816CE; };
@@ -54,6 +55,7 @@
 		0971A5CE59F26D6DF6E58620 /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = /Users/camila/Downloads/JUCE/modules/juce_gui_basics; sourceTree = "<absolute>"; };
 		0C67BBB6EA7654B5FD31E07C /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
 		0E66DED0FADEDBA409A040FA /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
+		0FB521BBF72F6BD30CFBBC8C /* DeckGUI.cpp */ /* DeckGUI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DeckGUI.cpp; path = ../../Source/DeckGUI.cpp; sourceTree = SOURCE_ROOT; };
 		20454F2803374EE03B0A50A4 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2212217E12F88CAC02C07C62 /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		230AEBFAFBC1508E2942CF23 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = /Users/camila/Downloads/JUCE/modules/juce_audio_basics; sourceTree = "<absolute>"; };
@@ -77,6 +79,7 @@
 		8427169ABF0C905CBA1765C1 /* include_juce_cryptography.mm */ /* include_juce_cryptography.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_cryptography.mm; path = ../../JuceLibraryCode/include_juce_cryptography.mm; sourceTree = SOURCE_ROOT; };
 		86FCD0804C6FC986A0BEB6B8 /* Metal.framework */ /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		8A31E6DF249463D602329011 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		90E58F241F09D2F50D079487 /* DeckGUI.h */ /* DeckGUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeckGUI.h; path = ../../Source/DeckGUI.h; sourceTree = SOURCE_ROOT; };
 		988A92536F6C0FF2146BE468 /* Main.cpp */ /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../Source/Main.cpp; sourceTree = SOURCE_ROOT; };
 		9CB0227FA358212A933F1EEC /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = /Users/camila/Downloads/JUCE/modules/juce_dsp; sourceTree = "<absolute>"; };
 		A589B33BC4F6830604336EDD /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = /Users/camila/Downloads/JUCE/modules/juce_audio_devices; sourceTree = "<absolute>"; };
@@ -218,6 +221,8 @@
 			children = (
 				EA457706D3A4C8F73E607F08,
 				C803B2AD35DFF15837ABCE5B,
+				0FB521BBF72F6BD30CFBBC8C,
+				90E58F241F09D2F50D079487,
 				2839F06D6C49505A7A98EA5D,
 				A799043AC50236B70A583BFA,
 				988A92536F6C0FF2146BE468,
@@ -334,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D6D40CFD636EABE938A1744,
+				78AD87CEB890BBD7FE1F1CDA,
 				08FB409D54B112C7F3F39850,
 				E531A75057D7DBEE46AB161D,
 				5F303BCA086D07D394309EA1,

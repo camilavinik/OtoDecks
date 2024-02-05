@@ -7,6 +7,8 @@
       <FILE id="nBjnc1" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="tYrnfO" name="DJAudioPlayer.cpp" compile="1" resource="0"
             file="Source/DJAudioPlayer.cpp"/>
+      <FILE id="lPh7Ru" name="DeckGUI.cpp" compile="1" resource="0" file="Source/DeckGUI.cpp"/>
+      <FILE id="QYOyuO" name="DeckGUI.h" compile="0" resource="0" file="Source/DeckGUI.h"/>
       <FILE id="TTOHzO" name="DJAudioPlayer.h" compile="0" resource="0" file="Source/DJAudioPlayer.h"/>
       <FILE id="OJ0Xrs" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>

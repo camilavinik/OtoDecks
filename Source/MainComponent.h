@@ -10,15 +10,14 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "DJAudioPlayer.h"
+#include "DeckGUI.h"
 
 //==============================================================================
 /*
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public AudioAppComponent,
-                        public Button::Listener,
-                        public Slider::Listener
+class MainComponent   : public AudioAppComponent
 {
 public:
     //==============================================================================
@@ -33,27 +32,13 @@ public:
     //==============================================================================
     void paint (Graphics& g) override;
     void resized() override;
-    
-    /** Implement Button::Listener*/
-    void buttonClicked (Button *) override;
-
-        /** Implement Slider::Listener*/
-    void sliderValueChanged (Slider *slider) override;
 
 private:
-    //==============================================================================
-    // Your private member variables go here...
-
-    TextButton playButton{"PLAY"};
-    TextButton stopButton{"STOP"};
-    TextButton loadButton{"LOAD"};
-
-    Slider volSlider;
-    Slider speedSlider;
-    Slider posSlider;
     DJAudioPlayer player1;
+    DeckGUI deckGUI1{&player1};
 
-    juce::FileChooser fChooser{"Select a file..."};
+    DJAudioPlayer player2;
+    DeckGUI deckGUI2{&player2};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

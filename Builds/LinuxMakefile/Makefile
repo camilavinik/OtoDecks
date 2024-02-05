@@ -73,6 +73,7 @@ endif
 
 OBJECTS_APP := \
   $(JUCE_OBJDIR)/DJAudioPlayer_f05158f2.o \
+  $(JUCE_OBJDIR)/DeckGUI_914d8333.o \
   $(JUCE_OBJDIR)/MainComponent_a6ffb4a5.o \
   $(JUCE_OBJDIR)/Main_90ebc5c2.o \
   $(JUCE_OBJDIR)/include_juce_audio_basics_8a4e984a.o \
@@ -108,6 +109,11 @@ $(JUCE_OUTDIR)/$(JUCE_TARGET_APP) : $(OBJECTS_APP) $(JUCE_OBJDIR)/execinfo.cmd $
 $(JUCE_OBJDIR)/DJAudioPlayer_f05158f2.o: ../../Source/DJAudioPlayer.cpp
 	-$(V_AT)mkdir -p $(@D)
 	@echo "Compiling DJAudioPlayer.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/DeckGUI_914d8333.o: ../../Source/DeckGUI.cpp
+	-$(V_AT)mkdir -p $(@D)
+	@echo "Compiling DeckGUI.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_APP) $(JUCE_CFLAGS_APP) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/MainComponent_a6ffb4a5.o: ../../Source/MainComponent.cpp
