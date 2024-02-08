@@ -10,6 +10,7 @@
 		01142F0911E6D5A6A12D64BA /* include_juce_audio_formats.mm */ = {isa = PBXBuildFile; fileRef = 2D5BAC8EE02701DEE697412B; };
 		08FB409D54B112C7F3F39850 /* MainComponent.cpp */ = {isa = PBXBuildFile; fileRef = A799043AC50236B70A583BFA; };
 		0A03F03A00372441521BD305 /* include_juce_audio_processors_ara.cpp */ = {isa = PBXBuildFile; fileRef = 75035379FC73A9D62ADA6344; };
+		1F1EA0704433E36569AA2BD5 /* WaveformDisplay.cpp */ = {isa = PBXBuildFile; fileRef = C9ED5F4BC7003BEBCBAB1FC3; };
 		235888EDCEA740A6EB69A28E /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXBuildFile; fileRef = C81D2F342FE4C7AB9B93B3D6; };
 		259E602E396C8D521A334C30 /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = 8A31E6DF249463D602329011; };
 		29ED7E173E64EFD945CA3978 /* Security.framework */ = {isa = PBXBuildFile; fileRef = D5CB600125668D5F7921DF03; };
@@ -76,6 +77,7 @@
 		63A0CEC7EEC21FFBC04D91E0 /* App */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OtoDecks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A76D6BEEFC1BAD446194A12 /* include_juce_opengl.mm */ /* include_juce_opengl.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_opengl.mm; path = ../../JuceLibraryCode/include_juce_opengl.mm; sourceTree = SOURCE_ROOT; };
 		75035379FC73A9D62ADA6344 /* include_juce_audio_processors_ara.cpp */ /* include_juce_audio_processors_ara.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_ara.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_ara.cpp; sourceTree = SOURCE_ROOT; };
+		81082241D1EA451D42D9D5CF /* WaveformDisplay.h */ /* WaveformDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WaveformDisplay.h; path = ../../Source/WaveformDisplay.h; sourceTree = SOURCE_ROOT; };
 		8427169ABF0C905CBA1765C1 /* include_juce_cryptography.mm */ /* include_juce_cryptography.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_cryptography.mm; path = ../../JuceLibraryCode/include_juce_cryptography.mm; sourceTree = SOURCE_ROOT; };
 		86FCD0804C6FC986A0BEB6B8 /* Metal.framework */ /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		8A31E6DF249463D602329011 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -90,6 +92,7 @@
 		C0DB72B3C6F5D4F84AA0DA97 /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		C803B2AD35DFF15837ABCE5B /* DJAudioPlayer.cpp */ /* DJAudioPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DJAudioPlayer.cpp; path = ../../Source/DJAudioPlayer.cpp; sourceTree = SOURCE_ROOT; };
 		C81D2F342FE4C7AB9B93B3D6 /* include_juce_audio_processors_lv2_libs.cpp */ /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_lv2_libs.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp; sourceTree = SOURCE_ROOT; };
+		C9ED5F4BC7003BEBCBAB1FC3 /* WaveformDisplay.cpp */ /* WaveformDisplay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = WaveformDisplay.cpp; path = ../../Source/WaveformDisplay.cpp; sourceTree = SOURCE_ROOT; };
 		CB06A465CF8B853DDEFA71E6 /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = /Users/camila/Downloads/JUCE/modules/juce_data_structures; sourceTree = "<absolute>"; };
 		D5CB600125668D5F7921DF03 /* Security.framework */ /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D8421FD1FAEB0C13C9371B3B /* MetalKit.framework */ /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
@@ -224,6 +227,8 @@
 				0FB521BBF72F6BD30CFBBC8C,
 				90E58F241F09D2F50D079487,
 				2839F06D6C49505A7A98EA5D,
+				C9ED5F4BC7003BEBCBAB1FC3,
+				81082241D1EA451D42D9D5CF,
 				A799043AC50236B70A583BFA,
 				988A92536F6C0FF2146BE468,
 			);
@@ -340,6 +345,7 @@
 			files = (
 				5D6D40CFD636EABE938A1744,
 				78AD87CEB890BBD7FE1F1CDA,
+				1F1EA0704433E36569AA2BD5,
 				08FB409D54B112C7F3F39850,
 				E531A75057D7DBEE46AB161D,
 				5F303BCA086D07D394309EA1,

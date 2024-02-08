@@ -12,6 +12,7 @@
 
 #include <JuceHeader.h>
 #include "DJAudioPlayer.h"
+#include "WaveformDisplay.h"
 
 //==============================================================================
 /*
@@ -41,6 +42,8 @@ class DeckGUI : public juce::Component, public Button::Listener, public Slider::
     Slider posSlider;
     
     DJAudioPlayer* player;
+
+    WaveformDisplay waveformDisplay;
     
     juce::FileChooser fChooser{"Select a file..."};
 

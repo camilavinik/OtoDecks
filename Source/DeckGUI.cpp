@@ -42,6 +42,9 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player) : player(_player)
   addAndMakeVisible(loadButton); 
   loadButton.addListener(this);
 
+  // wave display
+  addAndMakeVisible(waveformDisplay);
+
 }
 
 DeckGUI::~DeckGUI()
@@ -70,14 +73,15 @@ void DeckGUI::paint (juce::Graphics& g)
 
 void DeckGUI::resized()
 {
-  double rowH = getHeight() / 6;
+  double rowH = getHeight() / 8;
 
   playButton.setBounds(0, 0, getWidth(), rowH);
   stopButton.setBounds(0, rowH, getWidth(), rowH);
   volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
   speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
   posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
-  loadButton.setBounds(0, rowH * 5, getWidth(), rowH);
+  waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
+  loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
 }
 
 void DeckGUI::buttonClicked(Button* button) 
