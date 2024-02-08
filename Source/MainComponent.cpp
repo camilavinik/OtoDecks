@@ -30,6 +30,8 @@ MainComponent::MainComponent()
 
     addAndMakeVisible(deckGUI1);
     addAndMakeVisible(deckGUI2);
+
+    formatManager.registerBasicFormats();
 }
 
 MainComponent::~MainComponent()

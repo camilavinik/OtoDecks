@@ -12,7 +12,8 @@
 #include "DeckGUI.h"
 
 //==============================================================================
-DeckGUI::DeckGUI(DJAudioPlayer* _player) : player(_player)
+DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse) 
+                : player(_player), waveformDisplay(formatManagerToUse, cacheToUse)
 {
   player->registerBasicFormats();
 
@@ -111,6 +112,7 @@ void DeckGUI::buttonClicked(Button* button)
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
         {
             player->loadURL(URL{chooser.getResult()});
+            waveformDisplay.loadURL(URL{chooser.getResult()});
         });
     }
 }
