@@ -10,7 +10,7 @@
 
 #include "DJAudioPlayer.h"
 
-DJAudioPlayer::DJAudioPlayer() {}
+DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager): formatManager(_formatManager) {}
 DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate) {
@@ -71,9 +71,4 @@ void DJAudioPlayer::start() {
 
 void DJAudioPlayer::stop() {
   transportSource.stop();
-}
-
-void DJAudioPlayer::registerBasicFormats()
-{
-  formatManager.registerBasicFormats();
 }

@@ -14,7 +14,7 @@
 
 class DJAudioPlayer : public AudioSource {
   public:
-    DJAudioPlayer();
+    DJAudioPlayer(AudioFormatManager& _formatManager);
     ~DJAudioPlayer();
 
     //==============================================================================
@@ -31,10 +31,8 @@ class DJAudioPlayer : public AudioSource {
     void start();
     void stop();
 
-    void registerBasicFormats();
-
   private:
-    AudioFormatManager formatManager;
+    AudioFormatManager& formatManager;
     std::unique_ptr<AudioFormatReaderSource> readerSource;
     AudioTransportSource transportSource;
     ResamplingAudioSource resamplingSource{&transportSource, false, 2};

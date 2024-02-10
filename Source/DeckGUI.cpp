@@ -15,8 +15,6 @@
 DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse) 
                 : player(_player), waveformDisplay(formatManagerToUse, cacheToUse)
 {
-  player->registerBasicFormats();
-
   // play button
   addAndMakeVisible(playButton);
   playButton.addListener(this);

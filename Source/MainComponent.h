@@ -37,10 +37,10 @@ private:
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbCache{100};
 
-    DJAudioPlayer player1;
+    DJAudioPlayer player1{formatManager};
     DeckGUI deckGUI1{&player1, formatManager, thumbCache};
 
-    DJAudioPlayer player2;
+    DJAudioPlayer player2{formatManager};
     DeckGUI deckGUI2{&player2, formatManager, thumbCache};
 
     MixerAudioSource mixerSource;
