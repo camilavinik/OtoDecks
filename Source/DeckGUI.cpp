@@ -44,10 +44,14 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse
   // wave display
   addAndMakeVisible(waveformDisplay);
 
+  // timer
+  startTimer(500);
+
 }
 
 DeckGUI::~DeckGUI()
 {
+    stopTimer();
 }
 
 void DeckGUI::paint (juce::Graphics& g)
@@ -144,4 +148,8 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
     if (files.size() == 1) {
         player->loadURL(URL(File{files[0]}));
     }
+}
+
+void DeckGUI::timerCallback() {
+    waveformDisplay.setPositionRelative(player->getPositionRelative());
 }

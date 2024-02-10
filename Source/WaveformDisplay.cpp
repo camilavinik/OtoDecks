@@ -63,7 +63,7 @@ void WaveformDisplay::changeListenerCallback(ChangeBroadcaster *source) {
 
 void WaveformDisplay::setPositionRelative(double pos) {
   if (pos != position) {
-    pos = position;
+    position = pos;
     repaint();
   }
 }
