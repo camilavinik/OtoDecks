@@ -12,7 +12,7 @@
 #include "WaveformDisplay.h"
 
 //==============================================================================
-WaveformDisplay::WaveformDisplay(AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse): audioThumb(1000, formatManagerToUse, cacheToUse), fileLoaded(false)
+WaveformDisplay::WaveformDisplay(AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse): audioThumb(1000, formatManagerToUse, cacheToUse), fileLoaded(false), position(0)
 {
   audioThumb.addChangeListener(this);
 }
@@ -31,7 +31,9 @@ void WaveformDisplay::paint (juce::Graphics& g)
     g.setColour (juce::Colours::orange);
 
     if (fileLoaded) {
-        audioThumb.drawChannel(g, getLocalBounds(), 0, audioThumb.getTotalLength(), 0, 1.0f);
+      audioThumb.drawChannel(g, getLocalBounds(), 0, audioThumb.getTotalLength(), 0, 1.0f);
+      g.setColour(Colours::lightgreen);
+      g.drawRect(position * getWidth(), 0, 2, getHeight());
     } else {
       g.setFont (20.0f);
       g.drawText ("File not loaded...", getLocalBounds(),
@@ -56,5 +58,12 @@ void WaveformDisplay::loadURL(URL audioURL) {
 
 void WaveformDisplay::changeListenerCallback(ChangeBroadcaster *source) {
   std::cout << "wfd: change received!" << std::endl;
+  repaint();
+}
+
+void WaveformDisplay::setPositionRelative(double pos) {
+  if (pos != position) {
+    pos = position;
     repaint();
+  }
 }
