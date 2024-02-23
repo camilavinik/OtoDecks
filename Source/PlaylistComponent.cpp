@@ -14,8 +14,13 @@
 //==============================================================================
 PlaylistComponent::PlaylistComponent()
 {
+    trackTitles.push_back("Track 1");
+    trackTitles.push_back("Track 2");
+
     tableComponent.getHeader().addColumn("Track Title", 1, 400);
     tableComponent.getHeader().addColumn("Artist", 2, 400);
+    tableComponent.setModel(this);
+
     addAndMakeVisible(tableComponent);
 
 }
@@ -48,3 +53,15 @@ void PlaylistComponent::resized()
 {
     tableComponent.setBounds(0, 0, getWidth(), getHeight());
 }
+
+int PlaylistComponent::getNumRows () {
+  return trackTitles.size();
+};
+
+void PlaylistComponent::paintRowBackground (Graphics &, int rowNumber, int width, int height, bool rowIsSelected) {
+
+};
+    
+void PlaylistComponent::paintCell (Graphics &, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
+
+};
