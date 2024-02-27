@@ -16,6 +16,10 @@ PlaylistComponent::PlaylistComponent()
 {
     trackTitles.push_back("Track 1");
     trackTitles.push_back("Track 2");
+    trackTitles.push_back("Track 3");
+    trackTitles.push_back("Track 4");
+    trackTitles.push_back("Track 5");
+    trackTitles.push_back("Track 6");
 
     tableComponent.getHeader().addColumn("Track Title", 1, 400);
     tableComponent.getHeader().addColumn("Artist", 2, 400);
@@ -58,10 +62,14 @@ int PlaylistComponent::getNumRows () {
   return trackTitles.size();
 };
 
-void PlaylistComponent::paintRowBackground (Graphics &, int rowNumber, int width, int height, bool rowIsSelected) {
-
+void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
+  if (rowIsSelected) {
+    g.fillAll(Colours::orange);
+  } else {
+    g.fillAll(Colours::darkgrey);
+  }
 };
     
-void PlaylistComponent::paintCell (Graphics &, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
-
+void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
+    g.drawText(trackTitles[rowNumber], 2, 0, width - 4, height, Justification::centredLeft, true);
 };
