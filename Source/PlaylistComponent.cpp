@@ -76,8 +76,17 @@ void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, in
 
 Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) {
   if (columnId == 2 && existingComponentToUpdate == nullptr) {
-    existingComponentToUpdate = new TextButton("play");
+    TextButton* btn = new TextButton("play");
+    String id{std::to_string(rowNumber)};
+    btn->setComponentID(id);
+    btn->addListener(this);
+    existingComponentToUpdate = btn;
   }
   
-    return existingComponentToUpdate;
+  return existingComponentToUpdate;
+}
+
+void PlaylistComponent::buttonClicked(Button* button) {
+  int id = std::stoi(button->getComponentID().toStdString());
+  std::cout << "PlaylistComponent::buttonClicked " << trackTitles[id] << std::endl;
 }

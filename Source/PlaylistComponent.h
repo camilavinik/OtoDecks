@@ -17,7 +17,7 @@
 //==============================================================================
 /*
 */
-class PlaylistComponent  : public juce::Component, public TableListBoxModel
+class PlaylistComponent  : public juce::Component, public TableListBoxModel, public Button::Listener
 {
 public:
     PlaylistComponent();
@@ -31,6 +31,7 @@ public:
     void paintCell (Graphics &, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) override;
 
+    void buttonClicked(Button* button) override;
 private:
     TableListBox tableComponent;
     std::vector<std::string> trackTitles;
