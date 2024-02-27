@@ -22,7 +22,7 @@ PlaylistComponent::PlaylistComponent()
     trackTitles.push_back("Track 6");
 
     tableComponent.getHeader().addColumn("Track Title", 1, 400);
-    tableComponent.getHeader().addColumn("Artist", 2, 400);
+    tableComponent.getHeader().addColumn("", 2, 400);
     tableComponent.setModel(this);
 
     addAndMakeVisible(tableComponent);
@@ -73,3 +73,11 @@ void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int wid
 void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
     g.drawText(trackTitles[rowNumber], 2, 0, width - 4, height, Justification::centredLeft, true);
 };
+
+Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) {
+  if (columnId == 2 && existingComponentToUpdate == nullptr) {
+    existingComponentToUpdate = new TextButton("play");
+  }
+  
+    return existingComponentToUpdate;
+}
