@@ -114,7 +114,7 @@ void DeckGUI::buttonClicked(Button* button)
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
         {
             File selectedFile = chooser.getResult();
-            if (selectedFile != File{}) {
+            if (selectedFile != File{}) { // solved bug with this, include on report
                 player->loadURL(URL{selectedFile});
                 waveformDisplay.loadURL(URL{selectedFile});
                 
