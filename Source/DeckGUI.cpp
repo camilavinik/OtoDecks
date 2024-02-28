@@ -12,8 +12,8 @@
 #include "DeckGUI.h"
 
 //==============================================================================
-DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse) 
-                : player(_player), waveformDisplay(formatManagerToUse, cacheToUse)
+DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse, PlaylistComponent& _playlistComponent) 
+                : player(_player), waveformDisplay(formatManagerToUse, cacheToUse), playlistComponent(_playlistComponent)
 {
   // play button
   addAndMakeVisible(playButton);
@@ -113,8 +113,11 @@ void DeckGUI::buttonClicked(Button* button)
         // not seen before. Please do not worry too much about that. 
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
         {
-            player->loadURL(URL{chooser.getResult()});
-            waveformDisplay.loadURL(URL{chooser.getResult()});
+            File selectedFile = chooser.getResult();
+            player->loadURL(URL{selectedFile});
+            waveformDisplay.loadURL(URL{selectedFile});
+            
+            playlistComponent.addTrack(selectedFile.getFileNameWithoutExtension().toStdString());
         });
     }
 }
@@ -147,6 +150,7 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 
     if (files.size() == 1) {
         player->loadURL(URL(File{files[0]}));
+        //TODO: update playlist
     }
 }
 

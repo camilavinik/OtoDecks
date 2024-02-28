@@ -1,25 +1,12 @@
-/*
-  ==============================================================================
-
-    PlaylistComponent.h
-    Created: 22 Feb 2024 7:37:07pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include <vector>
 #include <string>
 
-//==============================================================================
-/*
-*/
 class PlaylistComponent  : public juce::Component, public TableListBoxModel, public Button::Listener
 {
-public:
+  public:
     PlaylistComponent();
     ~PlaylistComponent() override;
 
@@ -32,7 +19,10 @@ public:
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) override;
 
     void buttonClicked(Button* button) override;
-private:
+
+    void addTrack(std::string);
+      
+  private:
     TableListBox tableComponent;
     std::vector<std::string> trackTitles;
 

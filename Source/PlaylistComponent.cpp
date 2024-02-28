@@ -1,32 +1,20 @@
-/*
-  ==============================================================================
-
-    PlaylistComponent.cpp
-    Created: 22 Feb 2024 7:37:07pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "PlaylistComponent.h"
 
-//==============================================================================
 PlaylistComponent::PlaylistComponent()
 {
-    trackTitles.push_back("Track 1");
-    trackTitles.push_back("Track 2");
-    trackTitles.push_back("Track 3");
-    trackTitles.push_back("Track 4");
-    trackTitles.push_back("Track 5");
-    trackTitles.push_back("Track 6");
+  // Set columns
+  tableComponent.getHeader().addColumn("Track Title", 1, 300);
+  tableComponent.getHeader().addColumn("", 2, 1); //1 indicates dynamic width TODO: check documentation
+  tableComponent.getHeader().addColumn("", 3, 1);
+  tableComponent.getHeader().addColumn("", 4, 1);
 
-    tableComponent.getHeader().addColumn("Track Title", 1, 400);
-    tableComponent.getHeader().addColumn("", 2, 400);
-    tableComponent.setModel(this);
+  // Set stretch active for dynamic column widths
+  tableComponent.getHeader().setStretchToFitActive(true);
 
-    addAndMakeVisible(tableComponent);
+  tableComponent.setModel(this);
 
+  addAndMakeVisible(tableComponent);
 }
 
 PlaylistComponent::~PlaylistComponent()
@@ -75,18 +63,39 @@ void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, in
 };
 
 Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) {
-  if (columnId == 2 && existingComponentToUpdate == nullptr) {
-    TextButton* btn = new TextButton("play");
-    String id{std::to_string(rowNumber)};
-    btn->setComponentID(id);
-    btn->addListener(this);
-    existingComponentToUpdate = btn;
+  if (existingComponentToUpdate == nullptr) {
+    if (columnId == 2) { //TODO: refactor
+      TextButton* btn = new TextButton("play on deck 1");
+      String id{std::to_string(rowNumber) + "_deck_1"};
+      btn->setComponentID(id);
+      btn->addListener(this);
+      existingComponentToUpdate = btn;
+    } else if (columnId == 3) {
+      TextButton* btn = new TextButton("play on deck 2");
+      String id{std::to_string(rowNumber) + "_deck_2"};
+      btn->setComponentID(id);
+      btn->addListener(this);
+      existingComponentToUpdate = btn;
+    } else if (columnId == 4) {
+      TextButton* btn = new TextButton("delete");
+      String id{std::to_string(rowNumber) + "_delete"};
+      btn->setComponentID(id);
+      btn->addListener(this);
+      existingComponentToUpdate = btn;
+    }
   }
   
   return existingComponentToUpdate;
 }
 
 void PlaylistComponent::buttonClicked(Button* button) {
-  int id = std::stoi(button->getComponentID().toStdString());
-  std::cout << "PlaylistComponent::buttonClicked " << trackTitles[id] << std::endl;
+  std::cout << "PlaylistComponent::buttonClicked " << button->getComponentID() << std::endl;
+}
+
+void PlaylistComponent::addTrack(std::string track)
+{ 
+  trackTitles.push_back(track);
+
+  tableComponent.updateContent();
+  tableComponent.repaint();
 }
