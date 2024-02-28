@@ -114,10 +114,12 @@ void DeckGUI::buttonClicked(Button* button)
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser& chooser)
         {
             File selectedFile = chooser.getResult();
-            player->loadURL(URL{selectedFile});
-            waveformDisplay.loadURL(URL{selectedFile});
-            
-            playlistComponent.addTrack(selectedFile.getFileNameWithoutExtension().toStdString());
+            if (selectedFile != File{}) {
+                player->loadURL(URL{selectedFile});
+                waveformDisplay.loadURL(URL{selectedFile});
+                
+                playlistComponent.addTrack(selectedFile.getFileNameWithoutExtension().toStdString());
+            }
         });
     }
 }
