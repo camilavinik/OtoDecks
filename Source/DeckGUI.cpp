@@ -118,7 +118,7 @@ void DeckGUI::buttonClicked(Button* button)
                 player->loadURL(URL{selectedFile});
                 waveformDisplay.loadURL(URL{selectedFile});
                 
-                playlistComponent.addTrack(selectedFile.getFileNameWithoutExtension().toStdString());
+                playlistComponent.addTrack(selectedFile);
             }
         });
     }

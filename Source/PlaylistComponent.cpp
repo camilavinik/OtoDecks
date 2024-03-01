@@ -47,7 +47,7 @@ void PlaylistComponent::resized()
 }
 
 int PlaylistComponent::getNumRows () {
-  return trackTitles.size();
+  return tracks.size();
 };
 
 void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
@@ -59,7 +59,7 @@ void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int wid
 };
     
 void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
-    g.drawText(trackTitles[rowNumber], 2, 0, width - 4, height, Justification::centredLeft, true);
+    g.drawText(tracks[rowNumber].getFileNameWithoutExtension().toStdString(), 2, 0, width - 4, height, Justification::centredLeft, true);
 };
 
 Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) {
@@ -92,9 +92,9 @@ void PlaylistComponent::buttonClicked(Button* button) {
   std::cout << "PlaylistComponent::buttonClicked " << button->getComponentID() << std::endl;
 }
 
-void PlaylistComponent::addTrack(std::string track)
+void PlaylistComponent::addTrack(File track)
 { 
-  trackTitles.push_back(track);
+  tracks.push_back(track);
 
   tableComponent.updateContent();
   tableComponent.repaint();

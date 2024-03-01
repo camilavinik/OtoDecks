@@ -20,11 +20,11 @@ class PlaylistComponent  : public juce::Component, public TableListBoxModel, pub
 
     void buttonClicked(Button* button) override;
 
-    void addTrack(std::string);
+    void addTrack(File);
       
   private:
     TableListBox tableComponent;
-    std::vector<std::string> trackTitles;
+    std::vector<File> tracks;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlaylistComponent)
 };
