@@ -10,7 +10,7 @@
 
 #include "DJAudioPlayer.h"
 
-DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager): formatManager(_formatManager) {}
+DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse): formatManager(_formatManager), waveformDisplay(_formatManager, cacheToUse) {}
 DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate) {
@@ -35,6 +35,8 @@ void DJAudioPlayer::loadURL(URL audioURL) {
       transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
       readerSource.reset(newSource.release());
   }
+
+  waveformDisplay.loadURL(audioURL);
 }
 void DJAudioPlayer::setGain(double gain) {
   if (gain < 0 || gain > 1.0) {

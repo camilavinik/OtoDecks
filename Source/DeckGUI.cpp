@@ -12,8 +12,8 @@
 #include "DeckGUI.h"
 
 //==============================================================================
-DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse, PlaylistComponent& _playlistComponent) 
-                : player(_player), waveformDisplay(formatManagerToUse, cacheToUse), playlistComponent(_playlistComponent)
+DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent) 
+                : player(_player), playlistComponent(_playlistComponent)
 {
   // play button
   addAndMakeVisible(playButton);
@@ -42,7 +42,7 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, AudioFormatManager & formatManagerToUse
   loadButton.addListener(this);
 
   // wave display
-  addAndMakeVisible(waveformDisplay);
+  addAndMakeVisible(player->waveformDisplay);
 
   // timer
   startTimer(500);
@@ -83,7 +83,7 @@ void DeckGUI::resized()
   volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
   speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
   posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
-  waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
+  player->waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
   loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
 }
 
@@ -116,8 +116,6 @@ void DeckGUI::buttonClicked(Button* button)
             File selectedFile = chooser.getResult();
             if (selectedFile != File{}) { // solved bug with this, include on report
                 player->loadURL(URL{selectedFile});
-                waveformDisplay.loadURL(URL{selectedFile});
-                
                 playlistComponent.addTrack(selectedFile);
             }
         });
@@ -157,5 +155,5 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 }
 
 void DeckGUI::timerCallback() {
-    waveformDisplay.setPositionRelative(player->getPositionRelative());
+    player->waveformDisplay.setPositionRelative(player->getPositionRelative());
 }

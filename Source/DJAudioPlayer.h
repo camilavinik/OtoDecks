@@ -11,10 +11,11 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "WaveformDisplay.h"
 
 class DJAudioPlayer : public AudioSource {
   public:
-    DJAudioPlayer(AudioFormatManager& _formatManager);
+    DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse);
     ~DJAudioPlayer();
 
     //==============================================================================
@@ -33,6 +34,8 @@ class DJAudioPlayer : public AudioSource {
 
     /** get the relative position of the playhead */
     double getPositionRelative();
+
+    WaveformDisplay waveformDisplay;
 
   private:
     AudioFormatManager& formatManager;
