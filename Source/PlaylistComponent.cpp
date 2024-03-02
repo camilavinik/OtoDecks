@@ -91,30 +91,31 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
 
 void PlaylistComponent::buttonClicked(Button* button) {
   std::string id = button->getComponentID().toStdString();
-  DJAudioPlayer* player = PlaylistComponent::getPlayerFromButton(id);
-  File file = PlaylistComponent::getFileFromButton(id);
+  size_t pos = id.find('_');
+  int key = std::stoi(id.substr(0, pos));
 
-  player->loadURL(URL{file});
+  File file = tracks[key];
+
+  if (id.substr(pos + 1) == "1") { 
+    player1->loadURL(URL{file});
+  } else if (id.substr(pos + 1) == "2") {
+    player2->loadURL(URL{file});
+  } else {
+    tracks.erase(tracks.begin() + key);
+    tableComponent.updateContent();
+    tableComponent.repaint();
+  }
 }
 
 void PlaylistComponent::addTrack(File track)
 { 
+  auto iterator = std::find(tracks.begin(), tracks.end(), track);
+  if (iterator != tracks.end()) {
+    tracks.erase(iterator);
+  }
+
   tracks.push_back(track);
 
   tableComponent.updateContent();
   tableComponent.repaint();
-}
-
-File PlaylistComponent::getFileFromButton(std::string id) {
-  size_t pos = id.find('_');
-  int key = std::stoi(id.substr(0, pos));
-
-  return tracks[key];
-}
-
-DJAudioPlayer* PlaylistComponent::getPlayerFromButton(std::string id) {
-  size_t pos = id.find('_');
-
-  if (id.substr(pos + 1) == "1") return player1;
-  return player2;
 }

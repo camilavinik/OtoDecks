@@ -24,9 +24,6 @@ class PlaylistComponent  : public juce::Component, public TableListBoxModel, pub
     void addTrack(File);
       
   private:
-    File getFileFromButton(std::string id);
-    DJAudioPlayer* getPlayerFromButton(std::string id);
-
     TableListBox tableComponent;
     std::vector<File> tracks;
 
