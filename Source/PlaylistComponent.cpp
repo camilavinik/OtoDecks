@@ -1,7 +1,8 @@
 #include <JuceHeader.h>
 #include "PlaylistComponent.h"
 
-PlaylistComponent::PlaylistComponent()
+PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player1, DJAudioPlayer* _player2)
+                                    : player1(_player1), player2(_player2)
 {
   // Set columns
   tableComponent.getHeader().addColumn("Track Title", 1, 300);
@@ -66,19 +67,19 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
   if (existingComponentToUpdate == nullptr) {
     if (columnId == 2) { //TODO: refactor
       TextButton* btn = new TextButton("play on deck 1");
-      String id{std::to_string(rowNumber) + "_deck_1"};
+      String id{std::to_string(rowNumber) + "_1"};
       btn->setComponentID(id);
       btn->addListener(this);
       existingComponentToUpdate = btn;
     } else if (columnId == 3) {
       TextButton* btn = new TextButton("play on deck 2");
-      String id{std::to_string(rowNumber) + "_deck_2"};
+      String id{std::to_string(rowNumber) + "_2"};
       btn->setComponentID(id);
       btn->addListener(this);
       existingComponentToUpdate = btn;
     } else if (columnId == 4) {
       TextButton* btn = new TextButton("delete");
-      String id{std::to_string(rowNumber) + "_delete"};
+      String id{std::to_string(rowNumber) + "_0"};
       btn->setComponentID(id);
       btn->addListener(this);
       existingComponentToUpdate = btn;
@@ -89,7 +90,11 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
 }
 
 void PlaylistComponent::buttonClicked(Button* button) {
-  std::cout << "PlaylistComponent::buttonClicked " << button->getComponentID() << std::endl;
+  std::string id = button->getComponentID().toStdString();
+  DJAudioPlayer* player = PlaylistComponent::getPlayerFromButton(id);
+  File file = PlaylistComponent::getFileFromButton(id);
+
+  player->loadURL(URL{file});
 }
 
 void PlaylistComponent::addTrack(File track)
@@ -98,4 +103,18 @@ void PlaylistComponent::addTrack(File track)
 
   tableComponent.updateContent();
   tableComponent.repaint();
+}
+
+File PlaylistComponent::getFileFromButton(std::string id) {
+  size_t pos = id.find('_');
+  int key = std::stoi(id.substr(0, pos));
+
+  return tracks[key];
+}
+
+DJAudioPlayer* PlaylistComponent::getPlayerFromButton(std::string id) {
+  size_t pos = id.find('_');
+
+  if (id.substr(pos + 1) == "1") return player1;
+  return player2;
 }

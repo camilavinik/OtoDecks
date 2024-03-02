@@ -38,12 +38,12 @@ private:
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbCache{100};
     
-    PlaylistComponent playlistComponent;
-
     DJAudioPlayer player1{formatManager};
-    DeckGUI deckGUI1{&player1, formatManager, thumbCache, playlistComponent};
-
     DJAudioPlayer player2{formatManager};
+    
+    PlaylistComponent playlistComponent{&player1, &player2};
+
+    DeckGUI deckGUI1{&player1, formatManager, thumbCache, playlistComponent};
     DeckGUI deckGUI2{&player2, formatManager, thumbCache, playlistComponent};
 
     MixerAudioSource mixerSource;

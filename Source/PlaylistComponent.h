@@ -3,11 +3,12 @@
 #include <JuceHeader.h>
 #include <vector>
 #include <string>
+#include "DJAudioPlayer.h"
 
 class PlaylistComponent  : public juce::Component, public TableListBoxModel, public Button::Listener
 {
   public:
-    PlaylistComponent();
+    PlaylistComponent(DJAudioPlayer* player1, DJAudioPlayer* player2);
     ~PlaylistComponent() override;
 
     void paint (juce::Graphics&) override;
@@ -23,8 +24,14 @@ class PlaylistComponent  : public juce::Component, public TableListBoxModel, pub
     void addTrack(File);
       
   private:
+    File getFileFromButton(std::string id);
+    DJAudioPlayer* getPlayerFromButton(std::string id);
+
     TableListBox tableComponent;
     std::vector<File> tracks;
+
+    DJAudioPlayer* player1;
+    DJAudioPlayer* player2;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlaylistComponent)
 };
