@@ -61,15 +61,15 @@ void DeckGUI::paint (juce::Graphics& g)
 
 void DeckGUI::resized()
 {
-  double rowH = getHeight() / 8;
+  double rowH = 40;
 
-  playButton.setBounds(0, 0, getWidth(), rowH);
-  stopButton.setBounds(0, rowH, getWidth(), rowH);
-  volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
-  speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
-  posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
-  player->waveformDisplay.setBounds(11, rowH * 5, getWidth() - 22, rowH * 2);
-  loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
+  loadButton.setBounds(0, 0, getWidth() / 6, rowH);
+  playButton.setBounds(4 * getWidth() / 6, 0, getWidth() / 6, rowH);
+  stopButton.setBounds(5 * getWidth() / 6, 0 * 7, getWidth() / 6, rowH);
+  volSlider.setBounds(0, rowH * 1, getWidth(), rowH);
+  speedSlider.setBounds(0, rowH * 2, getWidth(), rowH);
+  posSlider.setBounds(0, rowH * 3, getWidth(), rowH);
+  player->waveformDisplay.setBounds(11, rowH * 4, getWidth() - 22, rowH * 3);
 }
 
 void DeckGUI::buttonClicked(Button* button) 
