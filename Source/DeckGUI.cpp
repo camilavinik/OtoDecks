@@ -1,17 +1,6 @@
-/*
-  ==============================================================================
-
-    DeckGUI.cpp
-    Created: 4 Feb 2024 10:02:41pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "DeckGUI.h"
 
-//==============================================================================
 DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent) 
                 : player(_player), playlistComponent(_playlistComponent)
 {
@@ -36,7 +25,10 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   addAndMakeVisible(posSlider);
   posSlider.addListener(this);
   posSlider.setRange(0.0, 1.0);
-
+  posSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
+  posSlider.setColour(Slider::thumbColourId, Colours::lightgreen); // Set the color of the slider thumb
+  posSlider.setColour(Slider::trackColourId, Colours::orange); // Set the color of the slider track
+    
   // load button
   addAndMakeVisible(loadButton); 
   loadButton.addListener(this);
@@ -56,13 +48,6 @@ DeckGUI::~DeckGUI()
 
 void DeckGUI::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
     g.setColour (juce::Colours::grey);
@@ -83,7 +68,7 @@ void DeckGUI::resized()
   volSlider.setBounds(0, rowH * 2, getWidth(), rowH);
   speedSlider.setBounds(0, rowH * 3, getWidth(), rowH);
   posSlider.setBounds(0, rowH * 4, getWidth(), rowH);
-  player->waveformDisplay.setBounds(0, rowH * 5, getWidth(), rowH * 2);
+  player->waveformDisplay.setBounds(11, rowH * 5, getWidth() - 22, rowH * 2);
   loadButton.setBounds(0, rowH * 7, getWidth(), rowH);
 }
 
@@ -155,5 +140,11 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 }
 
 void DeckGUI::timerCallback() {
-    player->waveformDisplay.setPositionRelative(player->getPositionRelative());
+    double position = player->getPositionRelative(); //TODO: maybe we should remove this validation after we remove these component when no file
+    
+    if (!std::isnan(position)) {
+        player->waveformDisplay.setPositionRelative(player->getPositionRelative());
+        
+        posSlider.setValue(player->getPositionRelative());
+    }
 }
