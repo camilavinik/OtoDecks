@@ -75,7 +75,7 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
-    deckGUI1.setBounds(0, 0, getWidth()/2, getHeight() / 2);
-    deckGUI2.setBounds(getWidth()/2, 0, getWidth()/2, getHeight() / 2);
-    playlistComponent.setBounds(0, getHeight() / 2, getWidth(), getHeight() / 2);
+    deckGUI1.setBounds(0, 0, getWidth() - 370, getHeight() / 2);
+    deckGUI2.setBounds(0, getHeight()/2, getWidth() - 370, getHeight() / 2);
+    playlistComponent.setBounds(getWidth() - 370, 0, 370, getHeight());
 }

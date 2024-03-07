@@ -5,13 +5,10 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player1, DJAudioPlayer* _pl
                                     : player1(_player1), player2(_player2)
 {
   // Set columns
-  tableComponent.getHeader().addColumn("Track Title", 1, 300);
-  tableComponent.getHeader().addColumn("", 2, 1); //1 indicates dynamic width TODO: check documentation
-  tableComponent.getHeader().addColumn("", 3, 1);
-  tableComponent.getHeader().addColumn("", 4, 1);
-
-  // Set stretch active for dynamic column widths
-  tableComponent.getHeader().setStretchToFitActive(true);
+  tableComponent.getHeader().addColumn("Track Title", 1, 160);
+  tableComponent.getHeader().addColumn("", 2, 80);
+  tableComponent.getHeader().addColumn("", 3, 80);
+  tableComponent.getHeader().addColumn("", 4, 50);
 
   tableComponent.setModel(this);
 
@@ -24,13 +21,6 @@ PlaylistComponent::~PlaylistComponent()
 
 void PlaylistComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
     g.setColour (juce::Colours::grey);
