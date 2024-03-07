@@ -34,6 +34,9 @@ class DJAudioPlayer : public AudioSource {
 
     /** get the relative position of the playhead */
     double getPositionRelative();
+    
+    bool hasAudioFile();
+    bool isPlaying();
 
     WaveformDisplay waveformDisplay;
 

@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    DJAudioPlayer.cpp
-    Created: 3 Feb 2024 3:13:35pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #include "DJAudioPlayer.h"
 
 DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse): formatManager(_formatManager), waveformDisplay(_formatManager, cacheToUse) {}
@@ -77,4 +67,12 @@ void DJAudioPlayer::stop() {
 
 double DJAudioPlayer::getPositionRelative() {
   return transportSource.getCurrentPosition() / transportSource.getLengthInSeconds();
+}
+
+bool DJAudioPlayer::hasAudioFile() {
+  return transportSource.getTotalLength() > 0;
+}
+
+bool DJAudioPlayer::isPlaying() {
+  return transportSource.isPlaying();
 }

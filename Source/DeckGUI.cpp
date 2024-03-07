@@ -38,7 +38,6 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
 
   // timer
   startTimer(500);
-
 }
 
 DeckGUI::~DeckGUI()
@@ -48,15 +47,28 @@ DeckGUI::~DeckGUI()
 
 void DeckGUI::paint (juce::Graphics& g)
 {
+    
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
     g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
 
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("DeckGUI", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    if (player->hasAudioFile()) {
+        volSlider.setVisible(true);
+        playButton.setVisible(true);
+        stopButton.setVisible(true);
+        speedSlider.setVisible(true);
+        posSlider.setVisible(true);
+        player->waveformDisplay.setVisible(true);
+
+        playButton.setEnabled(!player->isPlaying());
+        stopButton.setEnabled(player->isPlaying());
+    } else {
+        volSlider.setVisible(false);
+        playButton.setVisible(false);
+        stopButton.setVisible(false);
+        speedSlider.setVisible(false);
+        posSlider.setVisible(false);
+        player->waveformDisplay.setVisible(false);
+    }
 }
 
 void DeckGUI::resized()

@@ -25,20 +25,11 @@ void WaveformDisplay::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
     g.setColour (juce::Colours::orange);
 
-    if (fileLoaded) {
-      audioThumb.drawChannel(g, getLocalBounds(), 0, audioThumb.getTotalLength(), 0, 1.0f);
-      g.setColour(Colours::lightgreen);
-      g.drawRect(position * getWidth(), 0, 2, getHeight());
-    } else {
-      g.setFont (20.0f);
-      g.drawText ("File not loaded...", getLocalBounds(),
-      juce::Justification::centred, true);
-    }
+    audioThumb.drawChannel(g, getLocalBounds(), 0, audioThumb.getTotalLength(), 0, 1.0f);
+    g.setColour(Colours::lightgreen);
+    g.drawRect(position * getWidth(), 0, 2, getHeight());
 }
 
 void WaveformDisplay::resized()
