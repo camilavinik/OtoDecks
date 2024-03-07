@@ -1,22 +1,9 @@
-/*
-  ==============================================================================
-
-    DeckGUI.h
-    Created: 4 Feb 2024 10:02:41pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "DJAudioPlayer.h"
 #include "PlaylistComponent.h"
 
-//==============================================================================
-/*
-*/
 class DeckGUI : public juce::Component, public Button::Listener, public Slider::Listener, public FileDragAndDropTarget, public Timer
 {
   public:

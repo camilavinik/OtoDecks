@@ -154,6 +154,7 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
     if (files.size() == 1) {
         player->loadURL(URL(File{files[0]}));
         playlistComponent.addTrack(File{files[0]});
+        repaint();
     }
 }
 

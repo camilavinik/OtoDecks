@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    DJAudioPlayer.h
-    Created: 3 Feb 2024 3:13:35pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -18,7 +8,6 @@ class DJAudioPlayer : public AudioSource {
     DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse);
     ~DJAudioPlayer();
 
-    //==============================================================================
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
     void releaseResources() override;
@@ -35,7 +24,10 @@ class DJAudioPlayer : public AudioSource {
     /** get the relative position of the playhead */
     double getPositionRelative();
     
+    /** return true if an audio file was loaded */
     bool hasAudioFile();
+
+    /** return true if audio is playing, false if not */
     bool isPlaying();
 
     WaveformDisplay waveformDisplay;
