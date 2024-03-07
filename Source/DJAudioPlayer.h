@@ -32,6 +32,8 @@ class DJAudioPlayer : public AudioSource {
 
     WaveformDisplay waveformDisplay;
 
+    std::string fileName;
+
   private:
     AudioFormatManager& formatManager;
     std::unique_ptr<AudioFormatReaderSource> readerSource;

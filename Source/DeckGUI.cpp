@@ -63,6 +63,9 @@ void DeckGUI::paint (juce::Graphics& g)
         posSlider.setVisible(true);
         player->waveformDisplay.setVisible(true);
 
+        g.setFont (14.0f);
+        g.drawText (player->fileName, 10, 60, getWidth(), 20, 0, true);
+
         playButton.setEnabled(!player->isPlaying());
         stopButton.setEnabled(player->isPlaying());
     } else {
@@ -119,6 +122,7 @@ void DeckGUI::buttonClicked(Button* button)
             File selectedFile = chooser.getResult();
             if (selectedFile != File{}) { // solved bug with this, include on report
                 player->loadURL(URL{selectedFile});
+                player->fileName = selectedFile.getFileNameWithoutExtension().toStdString();
                 playlistComponent.addTrack(selectedFile);
             }
         });
@@ -152,8 +156,10 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
     std::cout << "DeckGUI::filesDropped" << std::endl;
 
     if (files.size() == 1) {
-        player->loadURL(URL(File{files[0]}));
-        playlistComponent.addTrack(File{files[0]});
+        File selectedFile = File{files[0]};
+        player->loadURL(URL(selectedFile));
+        player->fileName = selectedFile.getFileNameWithoutExtension().toStdString();
+        playlistComponent.addTrack(File{selectedFile});
         repaint();
     }
 }
