@@ -5,10 +5,10 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player1, DJAudioPlayer* _pl
                                     : player1(_player1), player2(_player2)
 {
   // Set columns
-  tableComponent.getHeader().addColumn("Track Title", 1, 240);
+  tableComponent.getHeader().addColumn("Track Title", 1, 245);
   tableComponent.getHeader().addColumn("Deck 1", 2, 50);
   tableComponent.getHeader().addColumn("Deck 2", 3, 50);
-  tableComponent.getHeader().addColumn("", 4, 30);
+  tableComponent.getHeader().addColumn("", 4, 25);
 
   tableComponent.setModel(this);
 
@@ -55,21 +55,23 @@ void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, in
 
 Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate) {
   if (existingComponentToUpdate == nullptr) {
-    if (columnId == 2) { //TODO: refactor
-      TextButton* btn = new TextButton("play");
-      String id{std::to_string(rowNumber) + "_1"};
-      btn->setComponentID(id);
-      btn->addListener(this);
-      existingComponentToUpdate = btn;
-    } else if (columnId == 3) {
-      TextButton* btn = new TextButton("play");
-      String id{std::to_string(rowNumber) + "_2"};
-      btn->setComponentID(id);
-      btn->addListener(this);
-      existingComponentToUpdate = btn;
-    } else if (columnId == 4) {
-      TextButton* btn = new TextButton("X");
-      String id{std::to_string(rowNumber) + "_0"};
+    if (columnId != 1) {
+      std::string columnID;
+      TextButton* btn = new TextButton();
+
+      if (columnId == 2) {
+        btn->setButtonText("play");
+        columnID = "_1";
+      } else if (columnId == 3) {
+        btn->setButtonText("play");
+        columnID = "_2";
+      } else if (columnId == 4) {
+        btn->setButtonText("X");
+        btn->setColour(TextButton::buttonColourId, Colours::red);
+        columnID = "_0";
+      }
+
+      String id{std::to_string(rowNumber) + columnID};
       btn->setComponentID(id);
       btn->addListener(this);
       existingComponentToUpdate = btn;
