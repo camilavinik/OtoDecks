@@ -1,6 +1,6 @@
 #include "DJAudioPlayer.h"
 
-DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse, Colour& color): formatManager(_formatManager), waveformDisplay(_formatManager, cacheToUse, color) {}
+DJAudioPlayer::DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse, Colour& color): waveformDisplay(_formatManager, cacheToUse, color), formatManager(_formatManager) {}
 DJAudioPlayer::~DJAudioPlayer() {}
 
 void DJAudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate) {

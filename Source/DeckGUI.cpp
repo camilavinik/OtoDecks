@@ -2,7 +2,7 @@
 #include "DeckGUI.h"
 
 DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent, Colour& _color) 
-                : player(_player), playlistComponent(_playlistComponent), color(_color)
+: color(_color), player(_player), playlistComponent(_playlistComponent)
 {
   // play button
   addAndMakeVisible(playButton);
