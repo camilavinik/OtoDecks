@@ -55,13 +55,18 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
     if (columnId != 1) {
       std::string columnID;
       TextButton* btn = new TextButton();
+        btn->setColour(ComboBox::outlineColourId, Colours::darkgrey);
 
       if (columnId == 2) {
-        btn->setButtonText("play");
+        btn->setButtonText("PLAY");
         columnID = "_1";
+        btn->setColour(TextButton::buttonColourId, Colour(35,242,120));
+        btn->setColour(TextButton::textColourOffId, Colour(0,0,0));
       } else if (columnId == 3) {
-        btn->setButtonText("play");
+        btn->setButtonText("PLAY");
         columnID = "_2";
+        btn->setColour(TextButton::buttonColourId, Colour(35,242,224));
+        btn->setColour(TextButton::textColourOffId, Colour(0,0,0));
       } else if (columnId == 4) {
         btn->setButtonText("X");
         btn->setColour(TextButton::buttonColourId, Colour(242,35,54));
