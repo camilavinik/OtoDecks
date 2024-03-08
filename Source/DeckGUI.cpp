@@ -194,9 +194,14 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 
     if (files.size() == 1) {
         File selectedFile = File{files[0]};
-        player->loadFile(selectedFile);
-        playlistComponent.addTrack(File{selectedFile});
-        repaint();
+
+        if (selectedFile.hasFileExtension("wav") || selectedFile.hasFileExtension("mp3")) {
+            player->loadFile(selectedFile);
+            playlistComponent.addTrack(File{selectedFile});
+            repaint();
+        } else {
+            std::cout << "DeckGUI::filesDropped Unsported format, use .wav or .mp3 files" << std::endl;
+        }
     }
 }
 
