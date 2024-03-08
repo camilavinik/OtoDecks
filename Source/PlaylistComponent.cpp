@@ -17,6 +17,7 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player1, DJAudioPlayer* _pl
 
 PlaylistComponent::~PlaylistComponent()
 {
+  tableComponent.setModel(nullptr);
 }
 
 void PlaylistComponent::paint (juce::Graphics& g)
