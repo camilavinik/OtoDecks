@@ -16,12 +16,15 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   addAndMakeVisible(volSlider);
   volSlider.addListener(this);
   volSlider.setRange(0.0, 1.0);
+  volSlider.setValue(0.5);
   volSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
   volSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
 
   // speed slider
   addAndMakeVisible(speedSlider);
   speedSlider.addListener(this);
+  speedSlider.setRange(0.1, 2.0);
+  speedSlider.setValue(1.0);
   speedSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
   speedSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
 
