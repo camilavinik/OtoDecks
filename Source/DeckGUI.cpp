@@ -74,6 +74,8 @@ void DeckGUI::paint (juce::Graphics& g)
 
         playButton.setEnabled(!player->isPlaying());
         stopButton.setEnabled(player->isPlaying());
+        
+        loadButton.setBounds(10, 10, getWidth() / 6, 35);
     } else {
         volSlider.setVisible(false);
         playButton.setVisible(false);
@@ -81,6 +83,9 @@ void DeckGUI::paint (juce::Graphics& g)
         speedSlider.setVisible(false);
         posSlider.setVisible(false);
         player->waveformDisplay.setVisible(false);
+
+        int buttonWidth = getWidth() / 6;
+        loadButton.setBounds((getWidth() - buttonWidth)/2, (getHeight() - 35) / 2, buttonWidth, 35);
     }
 }
 
