@@ -17,7 +17,8 @@ void DJAudioPlayer::releaseResources() {
   resamplingSource.releaseResources();
 }
 
-void DJAudioPlayer::loadURL(URL audioURL) {
+void DJAudioPlayer::loadFile(File audioFile) {
+  URL audioURL = URL{audioFile};
   auto* reader = formatManager.createReaderFor(audioURL.createInputStream(false));
   
   if (reader != nullptr) {// good file! 
@@ -25,7 +26,8 @@ void DJAudioPlayer::loadURL(URL audioURL) {
       transportSource.setSource(newSource.get(), 0, nullptr, reader->sampleRate);
       readerSource.reset(newSource.release());
   }
-
+  
+  fileName = audioFile.getFileNameWithoutExtension().toStdString();
   waveformDisplay.loadURL(audioURL);
 }
 void DJAudioPlayer::setGain(double gain) {

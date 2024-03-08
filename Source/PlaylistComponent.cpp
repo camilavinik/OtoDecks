@@ -89,9 +89,9 @@ void PlaylistComponent::buttonClicked(Button* button) {
   File file = tracks[key];
 
   if (id.substr(pos + 1) == "1") { 
-    player1->loadURL(URL{file});
+    player1->loadFile(file);
   } else if (id.substr(pos + 1) == "2") {
-    player2->loadURL(URL{file});
+    player2->loadFile(file);
   } else {
     tracks.erase(tracks.begin() + key);
     tableComponent.updateContent();

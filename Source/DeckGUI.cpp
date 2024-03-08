@@ -126,8 +126,7 @@ void DeckGUI::buttonClicked(Button* button)
         {
             File selectedFile = chooser.getResult();
             if (selectedFile != File{}) { // solved bug with this, include on report
-                player->loadURL(URL{selectedFile});
-                player->fileName = selectedFile.getFileNameWithoutExtension().toStdString();
+                player->loadFile(selectedFile);
                 playlistComponent.addTrack(selectedFile);
             }
         });
@@ -161,8 +160,7 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 
     if (files.size() == 1) {
         File selectedFile = File{files[0]};
-        player->loadURL(URL(selectedFile));
-        player->fileName = selectedFile.getFileNameWithoutExtension().toStdString();
+        player->loadFile(selectedFile);
         playlistComponent.addTrack(File{selectedFile});
         repaint();
     }
