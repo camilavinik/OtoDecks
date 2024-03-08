@@ -70,6 +70,7 @@ void DeckGUI::paint (juce::Graphics& g)
 
         g.setFont (14.0f);
         g.drawText (player->fileName, 10, 62, getWidth(), 20, 0, true);
+        g.drawText (player->getCurrentTime(), getWidth() - 69, 90, 60, 20, Justification::centred, true);
 
         playButton.setEnabled(!player->isPlaying());
         stopButton.setEnabled(player->isPlaying());
@@ -167,16 +168,11 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 }
 
 void DeckGUI::timerCallback() {
-    double position = player->getPositionRelative(); //TODO: maybe we should remove this validation after we remove these component when no file
-    
-    if (player->forceRepaint) {
-        player->forceRepaint = false;
-        repaint();
-    }
+    double position = player->getPositionRelative();
 
     if (!std::isnan(position)) {
         player->waveformDisplay.setPositionRelative(player->getPositionRelative());
-        
         posSlider.setValue(player->getPositionRelative());
+        repaint();
     }
 }

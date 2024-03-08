@@ -23,6 +23,9 @@ class DJAudioPlayer : public AudioSource {
 
     /** get the relative position of the playhead */
     double getPositionRelative();
+
+    /** get the current time in the format MM:SS */
+    std::string getCurrentTime();
     
     /** return true if an audio file was loaded */
     bool hasAudioFile();
@@ -33,8 +36,6 @@ class DJAudioPlayer : public AudioSource {
     WaveformDisplay waveformDisplay;
 
     std::string fileName;
-
-    bool forceRepaint = false;
 
   private:
     AudioFormatManager& formatManager;

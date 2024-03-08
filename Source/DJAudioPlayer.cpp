@@ -29,7 +29,6 @@ void DJAudioPlayer::loadFile(File audioFile) {
   
   fileName = audioFile.getFileNameWithoutExtension().toStdString();
   waveformDisplay.loadURL(audioURL);
-  forceRepaint = true;
 }
 void DJAudioPlayer::setGain(double gain) {
   if (gain < 0 || gain > 1.0) {
@@ -70,6 +69,18 @@ void DJAudioPlayer::stop() {
 
 double DJAudioPlayer::getPositionRelative() {
   return transportSource.getCurrentPosition() / transportSource.getLengthInSeconds();
+}
+
+std::string DJAudioPlayer::getCurrentTime() {
+  double positionInSeconds = transportSource.getCurrentPosition();
+
+  int minutes = static_cast<int>(positionInSeconds / 60);
+  int seconds = static_cast<int>(positionInSeconds) % 60;
+
+  std::string min = minutes < 10 ? "0" + std::to_string(minutes) : std::to_string(minutes);
+  std::string sec = seconds < 10 ? "0" + std::to_string(seconds) : std::to_string(seconds);
+
+  return  min + ":" + sec;
 }
 
 bool DJAudioPlayer::hasAudioFile() {
