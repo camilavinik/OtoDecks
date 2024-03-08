@@ -25,10 +25,14 @@ class DeckGUI : public juce::Component, public Button::Listener, public Slider::
     TextButton playButton{"PLAY"};
     TextButton stopButton{"STOP"};
     TextButton loadButton{"LOAD"};
+    TextButton closeButton{"X"};
 
     Slider volSlider;
     Slider speedSlider;
     Slider posSlider;
+
+    Label fileName;
+    Label time;
 
     Colour& color;
     

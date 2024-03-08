@@ -30,6 +30,11 @@ void DJAudioPlayer::loadFile(File audioFile) {
   fileName = audioFile.getFileNameWithoutExtension().toStdString();
   waveformDisplay.loadURL(audioURL);
 }
+
+void DJAudioPlayer::unload() {
+  transportSource.setSource(nullptr);
+}
+
 void DJAudioPlayer::setGain(double gain) {
   if (gain < 0 || gain > 1.0) {
     std::cout << "DJAudioPlayer::setGain gain should be between 0 and 1" << std::endl;

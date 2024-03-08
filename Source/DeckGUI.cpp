@@ -42,8 +42,22 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent, 
   addAndMakeVisible(loadButton); 
   loadButton.addListener(this);
 
+  // close/delete button
+  addAndMakeVisible(closeButton);
+  closeButton.addListener(this);
+
   // wave display
   addAndMakeVisible(player->waveformDisplay);
+
+  // file name label
+  addAndMakeVisible(fileName);
+  fileName.setFont(Font(14.0f));
+  fileName.setColour(Label::textColourId, Colours::grey);
+
+  // current time label
+  addAndMakeVisible(time);
+  time.setFont(Font(14.0f));
+  time.setColour(Label::textColourId, Colours::grey);
 
   // timer
   startTimer(500);
@@ -61,28 +75,33 @@ void DeckGUI::paint (juce::Graphics& g)
     g.setColour (juce::Colours::grey);
 
     if (player->hasAudioFile()) {
+        closeButton.setVisible(true);
         volSlider.setVisible(true);
         playButton.setVisible(true);
         stopButton.setVisible(true);
         speedSlider.setVisible(true);
         posSlider.setVisible(true);
         player->waveformDisplay.setVisible(true);
+        fileName.setVisible(true);
+        time.setVisible(true);
 
-        g.setFont (14.0f);
-        g.drawText (player->fileName, 10, 62, getWidth(), 20, 0, true);
-        g.drawText (player->getCurrentTime(), getWidth() - 69, 90, 60, 20, Justification::centred, true);
-
+        fileName.setText(player->fileName, dontSendNotification);
+        time.setText(player->getCurrentTime(), dontSendNotification);
+        
         playButton.setEnabled(!player->isPlaying());
         stopButton.setEnabled(player->isPlaying());
         
-        loadButton.setBounds(10, 10, getWidth() / 6, 35);
+        loadButton.setBounds(55, 10, getWidth() / 6, 35);
     } else {
+        closeButton.setVisible(false);
         volSlider.setVisible(false);
         playButton.setVisible(false);
         stopButton.setVisible(false);
         speedSlider.setVisible(false);
         posSlider.setVisible(false);
         player->waveformDisplay.setVisible(false);
+        fileName.setVisible(false);
+        time.setVisible(false);
 
         int buttonWidth = getWidth() / 6;
         loadButton.setBounds((getWidth() - buttonWidth)/2, (getHeight() - 35) / 2, buttonWidth, 35);
@@ -93,7 +112,7 @@ void DeckGUI::resized()
 {
   double waveWidth = getWidth() - 80;
 
-  loadButton.setBounds(10, 10, getWidth() / 6, 35);
+  closeButton.setBounds(10, 10, 35, 35);
   playButton.setBounds(4 * getWidth() / 6 - 20, 10, getWidth() / 6, 35);
   stopButton.setBounds(5 * getWidth() / 6 - 10, 10, getWidth() / 6, 35);
 
@@ -102,6 +121,9 @@ void DeckGUI::resized()
 
   volSlider.setBounds(waveWidth, 120, 40, getHeight() - 130);
   speedSlider.setBounds(waveWidth + 40, 120, 40, getHeight() - 130);
+
+  fileName.setBounds(10, 62, getWidth(), 20);
+  time.setBounds(getWidth() - 69, 90, 60, 20);
 }
 
 void DeckGUI::buttonClicked(Button* button) 
@@ -116,6 +138,12 @@ void DeckGUI::buttonClicked(Button* button)
     {
         std::cout << "Stop button was clicked" << std::endl;
         player->stop();
+    }
+
+    if (button == &closeButton)
+    {
+        std::cout << "Close/Delete button was clicked" << std::endl;
+        player->unload();
     }
 
     if (button == &loadButton)

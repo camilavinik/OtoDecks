@@ -13,6 +13,7 @@ class DJAudioPlayer : public AudioSource {
     void releaseResources() override;
 
     void loadFile(File audioFile);
+    void unload();
     void setGain(double gain);
     void setSpeed(double ratio);
     void setPosition(double posInSecs);
