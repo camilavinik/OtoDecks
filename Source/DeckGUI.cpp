@@ -35,8 +35,8 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   posSlider.addListener(this);
   posSlider.setRange(0.0, 1.0);
   posSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
-  posSlider.setColour(Slider::thumbColourId, Colours::red); // Set the color of the slider thumb
-  posSlider.setColour(Slider::trackColourId, Colours::skyblue); // Set the color of the slider track
+  posSlider.setColour(Slider::thumbColourId, Colour(242,35,54)); // Set the color of the slider thumb
+  posSlider.setColour(Slider::trackColourId, Colour(35,242,120)); // Set the color of the slider track
     
   // load button
   addAndMakeVisible(loadButton); 

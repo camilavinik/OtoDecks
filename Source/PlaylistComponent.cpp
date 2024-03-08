@@ -64,7 +64,7 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
         columnID = "_2";
       } else if (columnId == 4) {
         btn->setButtonText("X");
-        btn->setColour(TextButton::buttonColourId, Colours::red);
+        btn->setColour(TextButton::buttonColourId, Colour(242,35,54));
         columnID = "_0";
       }
 

@@ -25,10 +25,10 @@ void WaveformDisplay::paint (juce::Graphics& g)
 {
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
 
-    g.setColour (juce::Colours::skyblue);
+    g.setColour (Colour(35,242,120));
 
     audioThumb.drawChannel(g, getLocalBounds(), 0, audioThumb.getTotalLength(), 0, 1.0f);
-    g.setColour(Colours::red);
+    g.setColour(Colour(242,35,54));
     g.drawRect(position * getWidth(), 0, 2, getHeight());
 }
 
