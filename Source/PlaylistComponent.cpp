@@ -43,7 +43,7 @@ int PlaylistComponent::getNumRows () {
 };
 
 void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
-  g.fillAll(Colours::darkgrey);
+  g.fillAll(Colours::grey);
 };
     
 void PlaylistComponent::paintCell (Graphics & g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) {
@@ -55,7 +55,7 @@ Component* PlaylistComponent::refreshComponentForCell(int rowNumber, int columnI
     if (columnId != 1) {
       std::string columnID;
       TextButton* btn = new TextButton();
-        btn->setColour(ComboBox::outlineColourId, Colours::darkgrey);
+        btn->setColour(ComboBox::outlineColourId, Colours::grey);
 
       if (columnId == 2) {
         btn->setButtonText("PLAY");
