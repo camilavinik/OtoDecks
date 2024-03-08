@@ -34,6 +34,8 @@ class DJAudioPlayer : public AudioSource {
 
     std::string fileName;
 
+    bool forceRepaint = false;
+
   private:
     AudioFormatManager& formatManager;
     std::unique_ptr<AudioFormatReaderSource> readerSource;

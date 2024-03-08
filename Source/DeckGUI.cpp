@@ -169,6 +169,11 @@ void DeckGUI::filesDropped (const StringArray &files, int x, int y) {
 void DeckGUI::timerCallback() {
     double position = player->getPositionRelative(); //TODO: maybe we should remove this validation after we remove these component when no file
     
+    if (player->forceRepaint) {
+        player->forceRepaint = false;
+        repaint();
+    }
+
     if (!std::isnan(position)) {
         player->waveformDisplay.setPositionRelative(player->getPositionRelative());
         

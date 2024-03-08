@@ -29,6 +29,7 @@ void DJAudioPlayer::loadFile(File audioFile) {
   
   fileName = audioFile.getFileNameWithoutExtension().toStdString();
   waveformDisplay.loadURL(audioURL);
+  forceRepaint = true;
 }
 void DJAudioPlayer::setGain(double gain) {
   if (gain < 0 || gain > 1.0) {
