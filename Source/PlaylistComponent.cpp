@@ -5,7 +5,7 @@ PlaylistComponent::PlaylistComponent(DJAudioPlayer* _player1, DJAudioPlayer* _pl
                                     : player1(_player1), player2(_player2)
 {
   // Set columns
-  tableComponent.getHeader().addColumn("Track Title", 1, 245);
+  tableComponent.getHeader().addColumn("Recent Files", 1, 245);
   tableComponent.getHeader().addColumn("Deck 1", 2, 50);
   tableComponent.getHeader().addColumn("Deck 2", 3, 50);
   tableComponent.getHeader().addColumn("", 4, 25);

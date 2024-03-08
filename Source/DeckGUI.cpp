@@ -19,6 +19,7 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   volSlider.setValue(0.5);
   volSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
   volSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
+  volSlider.setColour(Slider::thumbColourId, Colours::grey); // Set the color of the slider thumb
 
   // speed slider
   addAndMakeVisible(speedSlider);
@@ -27,6 +28,7 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   speedSlider.setValue(1.0);
   speedSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
   speedSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
+  speedSlider.setColour(Slider::thumbColourId, Colours::grey); // Set the color of the slider thumb
 
   // position slider
   addAndMakeVisible(posSlider);
