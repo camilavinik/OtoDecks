@@ -1,8 +1,8 @@
 #include <JuceHeader.h>
 #include "DeckGUI.h"
 
-DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent) 
-                : player(_player), playlistComponent(_playlistComponent)
+DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent, Colour& _color) 
+                : player(_player), playlistComponent(_playlistComponent), color(_color)
 {
   // play button
   addAndMakeVisible(playButton);
@@ -36,7 +36,7 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   posSlider.setRange(0.0, 1.0);
   posSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
   posSlider.setColour(Slider::thumbColourId, Colour(242,35,54)); // Set the color of the slider thumb
-  posSlider.setColour(Slider::trackColourId, Colour(35,242,120)); // Set the color of the slider track
+  posSlider.setColour(Slider::trackColourId, color); // Set the color of the slider track
     
   // load button
   addAndMakeVisible(loadButton); 

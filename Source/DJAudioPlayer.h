@@ -5,7 +5,7 @@
 
 class DJAudioPlayer : public AudioSource {
   public:
-    DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse);
+    DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse, Colour& color);
     ~DJAudioPlayer();
 
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;

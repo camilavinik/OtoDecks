@@ -21,14 +21,17 @@ public:
 private:
     AudioFormatManager formatManager;
     AudioThumbnailCache thumbCache{100};
+
+    Colour deck1Color = Colour(35,242,120);
+    Colour deck2Color = Colour(35,242,224);
     
-    DJAudioPlayer player1{formatManager, thumbCache};
-    DJAudioPlayer player2{formatManager, thumbCache};
+    DJAudioPlayer player1{formatManager, thumbCache, deck1Color};
+    DJAudioPlayer player2{formatManager, thumbCache, deck2Color};
     
     PlaylistComponent playlistComponent{&player1, &player2};
 
-    DeckGUI deckGUI1{&player1, playlistComponent};
-    DeckGUI deckGUI2{&player2, playlistComponent};
+    DeckGUI deckGUI1{&player1, playlistComponent, deck1Color};
+    DeckGUI deckGUI2{&player2, playlistComponent, deck2Color};
 
     MixerAudioSource mixerSource;
 

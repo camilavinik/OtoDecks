@@ -7,7 +7,7 @@
 class DeckGUI : public juce::Component, public Button::Listener, public Slider::Listener, public FileDragAndDropTarget, public Timer
 {
   public:
-    DeckGUI(DJAudioPlayer* player, PlaylistComponent& playlistComponent);
+    DeckGUI(DJAudioPlayer* player, PlaylistComponent& playlistComponent, Colour& color);
     ~DeckGUI() override;
 
     void paint (juce::Graphics&) override;
@@ -29,6 +29,8 @@ class DeckGUI : public juce::Component, public Button::Listener, public Slider::
     Slider volSlider;
     Slider speedSlider;
     Slider posSlider;
+
+    Colour& color;
     
     DJAudioPlayer* player;
     
