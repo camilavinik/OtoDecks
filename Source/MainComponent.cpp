@@ -13,7 +13,7 @@ MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
     // you add any child components.
-    setSize (800, 600);
+    setSize (1000, 600);
 
     // Some platforms require permissions to open input channels so request that here
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
@@ -68,14 +68,16 @@ void MainComponent::releaseResources()
 void MainComponent::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
+    g.setColour (juce::Colours::grey);
+    g.drawRect(10, getHeight() / 2 - 1, getWidth() - 390, 2);
 
     // You can add your drawing code here!
 }
 
 void MainComponent::resized()
 {
-    deckGUI1.setBounds(0, 0, getWidth() - 370, getHeight() / 2);
-    deckGUI2.setBounds(0, getHeight()/2, getWidth() - 370, getHeight() / 2);
+    deckGUI1.setBounds(0, 0, getWidth() - 370, getHeight() / 2 - 1);
+    deckGUI2.setBounds(0, getHeight()/2 + 1, getWidth() - 370, getHeight() / 2);
     playlistComponent.setBounds(getWidth() - 370, 0, 370, getHeight());
 }

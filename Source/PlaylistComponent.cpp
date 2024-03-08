@@ -43,7 +43,7 @@ int PlaylistComponent::getNumRows () {
 
 void PlaylistComponent::paintRowBackground (Graphics & g, int rowNumber, int width, int height, bool rowIsSelected) {
   if (rowIsSelected) {
-    g.fillAll(Colours::orange);
+    g.fillAll(Colours::skyblue);
   } else {
     g.fillAll(Colours::darkgrey);
   }

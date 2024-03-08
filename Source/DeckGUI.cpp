@@ -30,8 +30,8 @@ DeckGUI::DeckGUI(DJAudioPlayer* _player, PlaylistComponent& _playlistComponent)
   posSlider.addListener(this);
   posSlider.setRange(0.0, 1.0);
   posSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0); // Hide the textbox
-  posSlider.setColour(Slider::thumbColourId, Colours::lightgreen); // Set the color of the slider thumb
-  posSlider.setColour(Slider::trackColourId, Colours::orange); // Set the color of the slider track
+  posSlider.setColour(Slider::thumbColourId, Colours::red); // Set the color of the slider thumb
+  posSlider.setColour(Slider::trackColourId, Colours::skyblue); // Set the color of the slider track
     
   // load button
   addAndMakeVisible(loadButton); 
@@ -64,7 +64,7 @@ void DeckGUI::paint (juce::Graphics& g)
         player->waveformDisplay.setVisible(true);
 
         g.setFont (14.0f);
-        g.drawText (player->fileName, 10, 60, getWidth(), 20, 0, true);
+        g.drawText (player->fileName, 10, 62, getWidth(), 20, 0, true);
 
         playButton.setEnabled(!player->isPlaying());
         stopButton.setEnabled(player->isPlaying());
@@ -82,9 +82,9 @@ void DeckGUI::resized()
 {
   double waveWidth = getWidth() - 80;
 
-  loadButton.setBounds(0, 0, getWidth() / 6, 40);
-  playButton.setBounds(4 * getWidth() / 6, 0, getWidth() / 6, 40);
-  stopButton.setBounds(5 * getWidth() / 6, 0 * 7, getWidth() / 6, 40);
+  loadButton.setBounds(10, 10, getWidth() / 6, 35);
+  playButton.setBounds(4 * getWidth() / 6 - 20, 10, getWidth() / 6, 35);
+  stopButton.setBounds(5 * getWidth() / 6 - 10, 10, getWidth() / 6, 35);
 
   posSlider.setBounds(0, 80, waveWidth, 40);
   player->waveformDisplay.setBounds(11, 120, waveWidth - 22, getHeight() - 130);
@@ -148,7 +148,6 @@ void DeckGUI::sliderValueChanged(Slider* slider)
 }
 
 bool DeckGUI::isInterestedInFileDrag(const StringArray &files) {
-    std::cout << "DeckGUI::isInterestedInFileDrag" << std::endl;
     return true;
 }
 
