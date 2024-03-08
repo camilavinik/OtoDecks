@@ -40,7 +40,7 @@ class DeckGUI : public juce::Component, public Button::Listener, public Slider::
     
     PlaylistComponent& playlistComponent;
     
-    juce::FileChooser fChooser{"Select a file..."};
+    juce::FileChooser fChooser{"Select a file...", File(), "*.wav;*.mp3"};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
 };
