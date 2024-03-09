@@ -35,7 +35,8 @@ void PlaylistComponent::resized()
 
 int PlaylistComponent::getNumRows()
 {
-  return tracks.size();
+  // Convert the number of tracks to an int and return it
+  return static_cast<int>(tracks.size());
 };
 
 void PlaylistComponent::paintRowBackground(Graphics &g, int rowNumber, int width, int height, bool rowIsSelected)
