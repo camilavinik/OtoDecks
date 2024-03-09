@@ -25,6 +25,9 @@ public:
   void addTrack(File);
 
 private:
+  /** Get the duration of an audio file in the format MM:SS */
+  static std::string getDuration(File audioFile);
+
   TableListBox tableComponent;
   std::vector<File> tracks;
 
