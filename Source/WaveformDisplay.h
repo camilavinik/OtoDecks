@@ -4,14 +4,14 @@
 
 //==============================================================================
 /*
-*/
-class WaveformDisplay  : public juce::Component, public ChangeListener
+ */
+class WaveformDisplay : public juce::Component, public ChangeListener
 {
 public:
-    WaveformDisplay(AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse, Colour& color);
+    WaveformDisplay(AudioFormatManager &formatManagerToUse, AudioThumbnailCache &cacheToUse, Colour &color);
     ~WaveformDisplay() override;
 
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics &) override;
     void resized() override;
 
     void changeListenerCallback(ChangeBroadcaster *source) override;
@@ -28,5 +28,5 @@ private:
 
     Colour color;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveformDisplay)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(WaveformDisplay)
 };

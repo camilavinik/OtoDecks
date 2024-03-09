@@ -3,44 +3,45 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "WaveformDisplay.h"
 
-class DJAudioPlayer : public AudioSource {
-  public:
-    DJAudioPlayer(AudioFormatManager& _formatManager, AudioThumbnailCache & cacheToUse, Colour& color);
-    ~DJAudioPlayer();
+class DJAudioPlayer : public AudioSource
+{
+public:
+  DJAudioPlayer(AudioFormatManager &_formatManager, AudioThumbnailCache &cacheToUse, Colour &color);
+  ~DJAudioPlayer();
 
-    void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
-    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
-    void releaseResources() override;
+  void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
+  void getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) override;
+  void releaseResources() override;
 
-    void loadFile(File audioFile);
-    void unload();
-    void setGain(double gain);
-    void setSpeed(double ratio);
-    void setPosition(double posInSecs);
-    void setPositionRelative(double pos);
+  void loadFile(File audioFile);
+  void unload();
+  void setGain(double gain);
+  void setSpeed(double ratio);
+  void setPosition(double posInSecs);
+  void setPositionRelative(double pos);
 
-    void start();
-    void stop();
+  void start();
+  void stop();
 
-    /** get the relative position of the playhead */
-    double getPositionRelative();
+  /** get the relative position of the playhead */
+  double getPositionRelative();
 
-    /** get the current time in the format MM:SS */
-    std::string getCurrentTime();
-    
-    /** return true if an audio file was loaded */
-    bool hasAudioFile();
+  /** get the current time in the format MM:SS */
+  std::string getCurrentTime();
 
-    /** return true if audio is playing, false if not */
-    bool isPlaying();
+  /** return true if an audio file was loaded */
+  bool hasAudioFile();
 
-    WaveformDisplay waveformDisplay;
+  /** return true if audio is playing, false if not */
+  bool isPlaying();
 
-    std::string fileName;
+  WaveformDisplay waveformDisplay;
 
-  private:
-    AudioFormatManager& formatManager;
-    std::unique_ptr<AudioFormatReaderSource> readerSource;
-    AudioTransportSource transportSource;
-    ResamplingAudioSource resamplingSource{&transportSource, false, 2};
+  std::string fileName;
+
+private:
+  AudioFormatManager &formatManager;
+  std::unique_ptr<AudioFormatReaderSource> readerSource;
+  AudioTransportSource transportSource;
+  ResamplingAudioSource resamplingSource{&transportSource, false, 2};
 };
