@@ -46,7 +46,7 @@ public:
   /** Return true if an audio file was loaded, false if not */
   bool hasAudioFile();
 
-  /** Return true if audio is playing, false if not */
+  /** Return true if audio is currently playing, false if not */
   bool isPlaying();
 
   WaveformDisplay waveformDisplay;
