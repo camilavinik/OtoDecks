@@ -56,6 +56,7 @@ void MainComponent::releaseResources()
 void MainComponent::paint(Graphics &g)
 {
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)); // clear the background
+    // Draw a line to separate the two decks
     g.setColour(juce::Colours::grey);
     g.drawRect(10, getHeight() / 2 - 1, getWidth() - 390, 2);
 }
