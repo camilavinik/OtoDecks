@@ -21,6 +21,7 @@ public:
 
   void buttonClicked(Button *button) override;
 
+  /** Receive a File and add it to the recent files table */
   void addTrack(File);
 
 private:
