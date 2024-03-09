@@ -1,17 +1,6 @@
-/*
-  ==============================================================================
-
-    WaveformDisplay.cpp
-    Created: 7 Feb 2024 9:22:05pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #include <JuceHeader.h>
 #include "WaveformDisplay.h"
 
-//==============================================================================
 WaveformDisplay::WaveformDisplay(AudioFormatManager &formatManagerToUse, AudioThumbnailCache &cacheToUse, Colour &_color) : audioThumb(1000, formatManagerToUse, cacheToUse), fileLoaded(false), position(0), color(_color)
 {
   audioThumb.addChangeListener(this);

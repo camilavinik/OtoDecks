@@ -1,14 +1,5 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-  ==============================================================================
-*/
-
 #include "MainComponent.h"
 
-//==============================================================================
 MainComponent::MainComponent()
 {
     // Make sure you set the size of the component after
@@ -37,11 +28,9 @@ MainComponent::MainComponent()
 
 MainComponent::~MainComponent()
 {
-    // This shuts down the audio device and clears the audio source.
     shutdownAudio();
 }
 
-//==============================================================================
 void MainComponent::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 {
     player1.prepareToPlay(samplesPerBlockExpected, sampleRate);
@@ -64,15 +53,11 @@ void MainComponent::releaseResources()
     mixerSource.releaseResources();
 }
 
-//==============================================================================
 void MainComponent::paint(Graphics &g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)); // clear the background
     g.setColour(juce::Colours::grey);
     g.drawRect(10, getHeight() / 2 - 1, getWidth() - 390, 2);
-
-    // You can add your drawing code here!
 }
 
 void MainComponent::resized()

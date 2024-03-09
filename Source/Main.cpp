@@ -1,27 +1,14 @@
-/*
-  ==============================================================================
-
-    This file was auto-generated!
-
-    It contains the basic startup code for a JUCE application.
-
-  ==============================================================================
-*/
-
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "MainComponent.h"
 
-//==============================================================================
 class OtoDecksApplication : public JUCEApplication
 {
 public:
-    //==============================================================================
     OtoDecksApplication() {}
     const String getApplicationName() override { return ProjectInfo::projectName; }
     const String getApplicationVersion() override { return ProjectInfo::versionString; }
     bool moreThanOneInstanceAllowed() override { return true; }
 
-    //==============================================================================
     void initialise(const String &commandLine) override
     {
         // This method is where you should put your application's initialisation code..
