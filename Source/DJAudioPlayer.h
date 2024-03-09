@@ -13,26 +13,40 @@ public:
   void getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill) override;
   void releaseResources() override;
 
+  /** Receives an audio file and loads it to the player*/
   void loadFile(File audioFile);
+
+  /** Unload the audio file from the player*/
   void unload();
+
+  /** Change the gain (volume) of the audio file */
   void setGain(double gain);
+
+  /** Change the speed of the audio file */
   void setSpeed(double ratio);
+
+  /** Set the position of the playhead in seconds */
   void setPosition(double posInSecs);
+
+  /** Set the position of the playhead relative to the audio file length*/
   void setPositionRelative(double pos);
 
+  /** Start audio player */
   void start();
+
+  /** Stop audio player */
   void stop();
 
-  /** get the relative position of the playhead */
+  /** Get the relative position of the playhead */
   double getPositionRelative();
 
-  /** get the current time in the format MM:SS */
+  /** Get the current time in the format MM:SS */
   std::string getCurrentTime();
 
-  /** return true if an audio file was loaded */
+  /** Return true if an audio file was loaded, false if not */
   bool hasAudioFile();
 
-  /** return true if audio is playing, false if not */
+  /** Return true if audio is playing, false if not */
   bool isPlaying();
 
   WaveformDisplay waveformDisplay;
