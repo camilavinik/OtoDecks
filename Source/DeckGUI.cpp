@@ -90,8 +90,8 @@ void DeckGUI::paint(juce::Graphics &g)
         fileName.setText(player->fileName, dontSendNotification);
         time.setText(player->getCurrentTime(), dontSendNotification);
 
-        playButton.setEnabled(!player->isPlaying());
-        stopButton.setEnabled(player->isPlaying());
+        playButton.setEnabled(!player->isPlaying()); // Disable the play button if the player is playing
+        stopButton.setEnabled(player->isPlaying());  // Disable the stop button if the player is not playing
 
         loadButton.setBounds(55, 10, getWidth() / 6, 35);
     }
