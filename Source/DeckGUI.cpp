@@ -4,67 +4,68 @@
 DeckGUI::DeckGUI(DJAudioPlayer *_player, PlaylistComponent &_playlistComponent, Colour &_color)
     : color(_color), player(_player), playlistComponent(_playlistComponent)
 {
-    // play button
+    // Play button
     addAndMakeVisible(playButton);
     playButton.addListener(this);
 
-    // stop button
+    // Stop button
     addAndMakeVisible(stopButton);
     stopButton.addListener(this);
 
-    // volume slider
+    // Volume slider
     addAndMakeVisible(volSlider);
     volSlider.addListener(this);
     volSlider.setRange(0.0, 1.0);
     volSlider.setValue(0.5);
     volSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);     // Hide the textbox
-    volSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
+    volSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Make it vertical
     volSlider.setColour(Slider::thumbColourId, Colours::grey);     // Set the color of the slider thumb
 
-    // speed slider
+    // Speed slider
     addAndMakeVisible(speedSlider);
     speedSlider.addListener(this);
-    speedSlider.setRange(0.1, 2.0);
-    speedSlider.setValue(1.0);
+    speedSlider.setRange(0.1, 2.0);                                  // Set the range of the slider
+    speedSlider.setValue(1.0);                                       // Set initial value
     speedSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);     // Hide the textbox
-    speedSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Vertical slider
+    speedSlider.setSliderStyle(Slider::SliderStyle::LinearVertical); // Make it vertical
     speedSlider.setColour(Slider::thumbColourId, Colours::grey);     // Set the color of the slider thumb
 
-    // position slider
+    // Position slider
     addAndMakeVisible(posSlider);
     posSlider.addListener(this);
-    posSlider.setRange(0.0, 1.0);
+    posSlider.setRange(0.0, 1.0);                                    // Set the range of the slider
     posSlider.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);       // Hide the textbox
     posSlider.setColour(Slider::thumbColourId, Colour(242, 35, 54)); // Set the color of the slider thumb
     posSlider.setColour(Slider::trackColourId, color);               // Set the color of the slider track
 
-    // load button
+    // Load button
     addAndMakeVisible(loadButton);
     loadButton.addListener(this);
 
-    // close/delete button
+    // Close/Delete button
     addAndMakeVisible(closeButton);
     closeButton.addListener(this);
 
-    // wave display
+    // Wave display
     addAndMakeVisible(player->waveformDisplay);
 
-    // file name label
+    // File name label
     addAndMakeVisible(fileName);
-    fileName.setFont(Font(14.0f));
-    fileName.setColour(Label::textColourId, Colours::grey);
+    fileName.setFont(Font(14.0f));                          // Set the font size
+    fileName.setColour(Label::textColourId, Colours::grey); // Set the color of the text
 
-    // current time label
+    // Current time label
     addAndMakeVisible(time);
-    time.setFont(Font(14.0f));
-    time.setColour(Label::textColourId, Colours::grey);
+    time.setFont(Font(14.0f));                          // Set the font size
+    time.setColour(Label::textColourId, Colours::grey); // Set the color of the text
 
-    // timer
+    // Start timer
     startTimer(500);
 }
 
 DeckGUI::~DeckGUI()
 {
+    // Stop timer when the component is deleted
     stopTimer();
 }
 
@@ -74,7 +75,7 @@ void DeckGUI::paint(juce::Graphics &g)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId)); // clear the background
     g.setColour(juce::Colours::grey);
 
-    if (player->hasAudioFile())
+    if (player->hasAudioFile()) // If audio file loaded show all the controls
     {
         closeButton.setVisible(true);
         volSlider.setVisible(true);
@@ -94,7 +95,7 @@ void DeckGUI::paint(juce::Graphics &g)
 
         loadButton.setBounds(55, 10, getWidth() / 6, 35);
     }
-    else
+    else // If no audio file loaded hide all the controls and center the load button
     {
         closeButton.setVisible(false);
         volSlider.setVisible(false);
@@ -162,7 +163,7 @@ void DeckGUI::buttonClicked(Button *button)
         fChooser.launchAsync(fileChooserFlags, [this](const FileChooser &chooser)
                              {
             File selectedFile = chooser.getResult();
-            if (selectedFile != File{}) { // solved bug with this, include on report
+            if (selectedFile != File{}) { // If a file was selected load it and add it to the playlist
                 player->loadFile(selectedFile);
                 playlistComponent.addTrack(selectedFile);
             } });
@@ -215,12 +216,10 @@ void DeckGUI::filesDropped(const StringArray &files, int x, int y)
 
 void DeckGUI::timerCallback()
 {
-    double position = player->getPositionRelative();
-
-    if (!std::isnan(position))
+    if (player->hasAudioFile()) // If file is loaded
     {
-        player->waveformDisplay.setPositionRelative(player->getPositionRelative());
-        posSlider.setValue(player->getPositionRelative());
-        repaint();
+        player->waveformDisplay.setPositionRelative(player->getPositionRelative()); // Update the position of the playhead in the waveform display
+        posSlider.setValue(player->getPositionRelative());                          // Update the position slider with current position
+        repaint();                                                                  // repaint the component to make sure the time label is updated
     }
 }
