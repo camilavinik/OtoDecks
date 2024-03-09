@@ -13,9 +13,10 @@ public:
 
     void changeListenerCallback(ChangeBroadcaster *source) override;
 
+    /** Receive an audio URL and load it to the waveform */
     void loadURL(URL audioURL);
 
-    /** set the relative position of the playhead */
+    /** Set the relative position of the playhead */
     void setPositionRelative(double pos);
 
 private:
