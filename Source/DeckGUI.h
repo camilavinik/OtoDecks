@@ -1,53 +1,46 @@
-/*
-  ==============================================================================
-
-    DeckGUI.h
-    Created: 4 Feb 2024 10:02:41pm
-    Author:  Camila
-
-  ==============================================================================
-*/
-
 #pragma once
 
 #include <JuceHeader.h>
 #include "DJAudioPlayer.h"
-#include "WaveformDisplay.h"
+#include "PlaylistComponent.h"
 
-//==============================================================================
-/*
-*/
 class DeckGUI : public juce::Component, public Button::Listener, public Slider::Listener, public FileDragAndDropTarget, public Timer
 {
-  public:
-    DeckGUI(DJAudioPlayer* player, AudioFormatManager & formatManagerToUse, AudioThumbnailCache & cacheToUse);
-    ~DeckGUI() override;
+public:
+  DeckGUI(DJAudioPlayer *player, PlaylistComponent &playlistComponent, Colour &color);
+  ~DeckGUI() override;
 
-    void paint (juce::Graphics&) override;
-    void resized() override;
+  void paint(juce::Graphics &) override;
+  void resized() override;
 
-    void buttonClicked(Button *) override;
-    void sliderValueChanged(Slider *slider) override;
+  void buttonClicked(Button *) override;
+  void sliderValueChanged(Slider *slider) override;
 
-    bool isInterestedInFileDrag(const StringArray &files) override;
-    void filesDropped (const StringArray &files, int x, int y) override;
+  bool isInterestedInFileDrag(const StringArray &files) override;
+  void filesDropped(const StringArray &files, int x, int y) override;
 
-    void timerCallback() override;
+  void timerCallback() override;
 
-  private:
-    TextButton playButton{"PLAY"};
-    TextButton stopButton{"STOP"};
-    TextButton loadButton{"LOAD"};
+private:
+  TextButton playButton{"PLAY"};
+  TextButton stopButton{"STOP"};
+  TextButton loadButton{"LOAD"};
+  TextButton closeButton{"X"};
 
-    Slider volSlider;
-    Slider speedSlider;
-    Slider posSlider;
-    
-    DJAudioPlayer* player;
+  Slider volSlider;
+  Slider speedSlider;
+  Slider posSlider;
 
-    WaveformDisplay waveformDisplay;
-    
-    juce::FileChooser fChooser{"Select a file..."};
+  Label fileName;
+  Label time;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeckGUI)
+  Colour &color;
+
+  DJAudioPlayer *player;
+
+  PlaylistComponent &playlistComponent;
+
+  juce::FileChooser fChooser{"Select a file...", File(), "*.wav;*.mp3"};
+
+  JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(DeckGUI)
 };
